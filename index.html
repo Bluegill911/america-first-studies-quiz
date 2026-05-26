@@ -11,6 +11,8 @@
         body { font-family: 'Inter', system_ui, sans-serif; }
         .heading-serif { font-family: 'Playfair Display', Georgia, serif; }
         .forest-header { background-color: #166534; background-image: linear-gradient(to right, #166534, #14532d); }
+        .level-card { transition: all 0.2s ease; }
+        .level-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
         .option-btn { transition: all 0.15s ease; }
         .option-btn:hover { transform: translateY(-1px); }
         .option-btn.selected { border-color: #166534; background-color: #f0fdf4; }
@@ -50,47 +52,49 @@
                     <span>Interactive Learning Tool</span>
                 </div>
                 <h2 class="text-4xl font-semibold tracking-tighter heading-serif text-green-900">Test &amp; Strengthen Your Civic Knowledge</h2>
-                <p class="mt-4 text-lg text-gray-600">Randomized questions. No repeats across rounds. Clean professional design.</p>
+                <p class="mt-4 text-lg text-gray-600">Randomized questions. No repeats across rounds. Deep understanding of American civics.</p>
             </div>
 
+            <!-- Level Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-                <!-- Level 1 -->
-                <div onclick="selectLevel(1)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                
+                <!-- Citizen -->
+                <div onclick="selectLevel(1)" class="level-card cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 1</div>
-                            <div class="text-2xl font-semibold mt-1">Beginner</div>
+                            <div class="text-2xl font-semibold mt-1">Citizen</div>
                         </div>
-                        <i class="fa-solid fa-seedling text-3xl text-green-600"></i>
+                        <i class="fa-solid fa-user text-3xl text-green-600"></i>
                     </div>
-                    <p class="mt-4 text-sm text-gray-600">5 questions • Constitution basics and key historical figures.</p>
-                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">Recommended for review</div>
+                    <p class="mt-4 text-sm text-gray-600">Foundational knowledge of American civics and history.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">5 questions</div>
                 </div>
 
-                <!-- Level 2 -->
-                <div onclick="selectLevel(2)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                <!-- Patriot -->
+                <div onclick="selectLevel(2)" class="level-card cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 2</div>
-                            <div class="text-2xl font-semibold mt-1">Intermediate</div>
+                            <div class="text-2xl font-semibold mt-1">Patriot</div>
                         </div>
-                        <i class="fa-solid fa-tree text-3xl text-green-600"></i>
+                        <i class="fa-solid fa-flag text-3xl text-green-600"></i>
                     </div>
-                    <p class="mt-4 text-sm text-gray-600">8 questions • Amendments, Progressive Era, and Supreme Court cases.</p>
-                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">Most popular</div>
+                    <p class="mt-4 text-sm text-gray-600">Deeper understanding of U.S. history, amendments, and key events.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">8 questions</div>
                 </div>
 
-                <!-- Level 3 -->
-                <div onclick="selectLevel(3)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                <!-- Founder -->
+                <div onclick="selectLevel(3)" class="level-card cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 3</div>
-                            <div class="text-2xl font-semibold mt-1">Advanced</div>
+                            <div class="text-2xl font-semibold mt-1">Founder</div>
                         </div>
-                        <i class="fa-solid fa-mountain text-3xl text-green-600"></i>
+                        <i class="fa-solid fa-landmark text-3xl text-green-600"></i>
                     </div>
-                    <p class="mt-4 text-sm text-gray-600">10 questions • Constitutional structure, civil rights, and historical context.</p>
-                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">For mastery</div>
+                    <p class="mt-4 text-sm text-gray-600">Advanced mastery of constitutional ideas and founding principles.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">10 questions</div>
                 </div>
             </div>
 
@@ -122,7 +126,6 @@
             <div class="quiz-card bg-white border border-green-200 rounded-3xl p-8 shadow-sm">
                 <div id="question-text" class="text-lg font-medium text-gray-900 leading-snug mb-8"></div>
                 <div id="options-container" class="space-y-3"></div>
-
                 <div id="explanation-box" class="hidden mt-6 p-5 bg-green-50 border border-green-200 rounded-2xl text-sm">
                     <div class="flex gap-x-3">
                         <i class="fa-solid fa-info-circle text-green-700 mt-0.5"></i>
@@ -136,10 +139,8 @@
 
             <div class="flex justify-between items-center mt-6 px-1">
                 <button onclick="resetToWelcome()" class="px-5 py-2.5 text-sm flex items-center gap-x-2 text-gray-500 hover:text-gray-700">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Exit Quiz</span>
+                    <i class="fa-solid fa-arrow-left"></i> <span>Exit Quiz</span>
                 </button>
-
                 <div class="flex gap-x-3">
                     <button id="submit-btn" onclick="submitAnswer()" class="px-8 py-2.5 rounded-2xl font-medium text-sm bg-green-700 text-white disabled:opacity-60" disabled>
                         Check Answer
@@ -151,7 +152,7 @@
             </div>
         </div>
 
-        <!-- RESULTS SCREEN -->
+        <!-- Results Screen -->
         <div id="results-screen" class="hidden max-w-2xl mx-auto">
             <div class="bg-white border border-green-200 rounded-3xl p-8 text-center">
                 <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -159,17 +160,12 @@
                 </div>
                 <h3 class="text-3xl font-semibold tracking-tight">Round Complete</h3>
                 <p id="results-level" class="text-green-700 mt-1"></p>
-
                 <div class="my-8">
                     <div class="text-7xl font-semibold tabular-nums text-green-900" id="final-score">0</div>
                     <div class="text-lg text-gray-500">correct out of <span id="total-questions"></span></div>
-                    <div class="mt-2">
-                        <span id="percentage-badge" class="inline-block px-4 py-1 rounded-2xl text-sm font-semibold"></span>
-                    </div>
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button onclick="startNewRound(currentLevel)" class="px-6 py-3 rounded-2xl font-medium bg-green-700 text-white flex items-center justify-center gap-x-2">
+                    <button onclick="startNewRound(currentLevel)" class="px-6 py-3 rounded-2xl font-medium bg-green-700 text-white flex items-center justify-center gap-x-2 hover:bg-green-800">
                         <i class="fa-solid fa-redo"></i>
                         <span>Start New Round</span>
                     </button>
@@ -177,26 +173,17 @@
                         Change Level
                     </button>
                 </div>
+                <div class="mt-6 pt-6 border-t">
+                    <button onclick="resetQuestionPool()" class="text-sm text-gray-500 hover:text-green-700 flex items-center justify-center gap-x-2 mx-auto">
+                        <i class="fa-solid fa-sync"></i>
+                        <span>Reset Question Pool</span>
+                    </button>
+                </div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // Tailwind Config
-        function initializeTailwind() {
-            tailwind.config = { theme: { extend: {} } };
-        }
-
-        // Questions
-        const questions = [
-            { id: 1, question: "Who is recognized as the primary author of the Declaration of Independence?", options: ["Thomas Jefferson", "John Adams", "Benjamin Franklin", "James Madison"], correctIndex: 0, explanation: "Thomas Jefferson was the principal author of the Declaration of Independence." },
-            { id: 2, question: "Which amendment guarantees citizenship, due process, and equal protection?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 1, explanation: "The 14th Amendment (1868) defines citizenship and guarantees due process and equal protection." },
-            { id: 3, question: "In what year was the U.S. Constitution signed?", options: ["1776", "1781", "1787", "1791"], correctIndex: 2, explanation: "The Constitution was signed on September 17, 1787." },
-            { id: 4, question: "How many amendments are in the Bill of Rights?", options: ["8", "10", "12", "27"], correctIndex: 1, explanation: "The Bill of Rights contains the first 10 amendments." },
-            { id: 5, question: "Which President is most associated with Progressive Era trust-busting?", options: ["Woodrow Wilson", "Theodore Roosevelt", "William Howard Taft", "Franklin D. Roosevelt"], correctIndex: 1, explanation: "Theodore Roosevelt aggressively enforced antitrust laws during the Progressive Era." }
-        ];
-
         let currentLevel = 1;
         let currentQuestions = [];
         let currentQuestionIndex = 0;
@@ -204,14 +191,76 @@
         let selectedButton = null;
         let usedQuestionIds = new Set();
 
-        function loadUsedQuestions() {
-            const saved = localStorage.getItem('afs_usedQuestionIds');
-            if (saved) usedQuestionIds = new Set(JSON.parse(saved));
-        }
+        // ========================================
+        // EXPANDED QUESTION BANK (60 questions)
+        // ========================================
+        const questions = [
+            // ===== CITIZEN LEVEL (10 questions) =====
+            { id: 1, level: 1, question: "Who is recognized as the primary author of the Declaration of Independence?", options: ["Thomas Jefferson", "John Adams", "Benjamin Franklin", "James Madison"], correctIndex: 0, explanation: "Thomas Jefferson was the principal author. The Declaration, adopted July 4, 1776, proclaimed American independence and outlined fundamental rights." },
+            { id: 2, level: 1, question: "In what year was the U.S. Constitution signed?", options: ["1776", "1781", "1787", "1791"], correctIndex: 2, explanation: "The Constitution was signed on September 17, 1787, at the Constitutional Convention in Philadelphia. It replaced the Articles of Confederation." },
+            { id: 3, level: 1, question: "How many amendments comprise the Bill of Rights?", options: ["8", "10", "12", "27"], correctIndex: 1, explanation: "The first ten amendments, ratified in 1791, protect fundamental liberties including speech, religion, press, assembly, and due process." },
+            { id: 4, level: 1, question: "Which branch of government has the power to veto legislation?", options: ["Legislative", "Judicial", "Executive", "Administrative"], correctIndex: 2, explanation: "The President (Executive branch) can veto bills passed by Congress. Congress can override a veto with a two-thirds majority." },
+            { id: 5, level: 1, question: "What is the primary purpose of the Senate?", options: ["Raise revenue through taxation", "Represent states equally in federal government", "Execute federal laws", "Interpret constitutional questions"], correctIndex: 1, explanation: "Each state has two senators, ensuring equal representation regardless of population. This was a key compromise at the Constitutional Convention." },
+            { id: 6, level: 1, question: "Who delivers the annual State of the Union address?", options: ["Chief Justice of the Supreme Court", "Speaker of the House", "President of the United States", "Senate Majority Leader"], correctIndex: 2, explanation: "The President delivers this address to Congress to report on the nation's condition and outline legislative priorities." },
+            { id: 7, level: 1, question: "How are Supreme Court justices selected?", options: ["Elected by popular vote", "Appointed by the President and confirmed by the Senate", "Selected by Congress", "Chosen by state governors"], correctIndex: 1, explanation: "The President nominates justices, and the Senate must confirm them by a simple majority. They serve lifetime appointments." },
+            { id: 8, level: 1, question: "Which amendment abolished slavery?", options: ["10th Amendment", "13th Amendment", "14th Amendment", "15th Amendment"], correctIndex: 1, explanation: "The 13th Amendment, ratified in 1865, abolished slavery throughout the United States, with narrow exceptions for criminals." },
+            { id: 9, level: 1, question: "What does the First Amendment protect?", options: ["Right to bear arms", "Freedom of speech, religion, press, and assembly", "Right to due process", "Protection against unreasonable searches"], correctIndex: 1, explanation: "The First Amendment guarantees fundamental freedoms essential to democratic participation and personal liberty." },
+            { id: 10, level: 1, question: "How many terms can a President serve?", options: ["Unlimited", "One", "Two", "Three"], correctIndex: 2, explanation: "The 22nd Amendment (1951) limits presidents to two terms, a precedent set by George Washington and made law after FDR's four terms." },
 
-        function saveUsedQuestions() {
-            localStorage.setItem('afs_usedQuestionIds', JSON.stringify(Array.from(usedQuestionIds)));
-        }
+            // ===== PATRIOT LEVEL (20 questions) =====
+            { id: 11, level: 2, question: "Which amendment guarantees citizenship, due process, and equal protection of the laws?", options: ["10th Amendment", "13th Amendment", "14th Amendment", "15th Amendment"], correctIndex: 2, explanation: "The 14th Amendment (1868) defines citizenship and prohibits states from depriving citizens of life, liberty, or property without due process. It's foundational to modern civil rights." },
+            { id: 12, level: 2, question: "What principle is established by the Supremacy Clause in Article VI?", options: ["States have ultimate authority over federal government", "Federal law is the supreme law of the land", "The judicial branch is most powerful", "Treaties cannot override state law"], correctIndex: 1, explanation: "The Supremacy Clause establishes that the Constitution, federal laws, and treaties are superior to state laws. This is essential to maintaining a cohesive federal system." },
+            { id: 13, level: 2, question: "The 1954 Supreme Court decision Brown v. Board of Education addressed which issue?", options: ["Voting rights for women", "Racial segregation in public schools", "Right to legal counsel", "Freedom of the press"], correctIndex: 1, explanation: "Brown v. Board unanimously declared 'separate but equal' unconstitutional, overturning Plessy v. Ferguson and catalyzing the civil rights movement." },
+            { id: 14, level: 2, question: "Which Progressive Era amendment provided for the direct election of U.S. Senators?", options: ["16th Amendment (income tax)", "17th Amendment", "18th Amendment (Prohibition)", "19th Amendment (women's suffrage)"], correctIndex: 1, explanation: "The 17th Amendment (1913) transferred Senate elections from state legislatures to popular vote, increasing democratic accountability." },
+            { id: 15, level: 2, question: "Who delivered the famous 'Give me liberty, or give me death!' speech in 1775?", options: ["Thomas Paine", "Patrick Henry", "Samuel Adams", "John Hancock"], correctIndex: 1, explanation: "Patrick Henry gave this rousing address at Virginia's Second Convention to rally support for independence from British rule." },
+            { id: 16, level: 2, question: "What was the primary purpose of the Federalist Papers?", options: ["Declare American independence", "Promote ratification of the Constitution", "Criticize British colonial policy", "Establish political parties"], correctIndex: 1, explanation: "Alexander Hamilton, James Madison, and John Jay wrote 85 essays to persuade states (especially New York) to ratify the Constitution." },
+            { id: 17, level: 2, question: "Which President is most associated with Progressive Era trust-busting?", options: ["Woodrow Wilson", "Theodore Roosevelt", "William Howard Taft", "Benjamin Harrison"], correctIndex: 1, explanation: "Theodore Roosevelt aggressively enforced antitrust laws and promoted conservation, embodying the Progressive Era's reform spirit." },
+            { id: 18, level: 2, question: "What did the 19th Amendment accomplish?", options: ["Extended voting rights to African Americans", "Granted women the right to vote", "Prohibited alcohol", "Established the income tax"], correctIndex: 1, explanation: "Ratified in 1920, the 19th Amendment granted women nationwide voting rights, a victory for the suffrage movement." },
+            { id: 19, level: 2, question: "Which article of the Constitution establishes the judicial branch?", options: ["Article I", "Article II", "Article III", "Article IV"], correctIndex: 2, explanation: "Article III creates the Supreme Court, defines judicial power, and authorizes Congress to establish lower federal courts." },
+            { id: 20, level: 2, question: "The concept of 'checks and balances' means:", options: ["Each branch has separate powers with ways to limit the others", "The President must approve all state laws", "The Senate controls the judiciary", "Congress can override any Supreme Court decision"], correctIndex: 0, explanation: "Checks and balances ensure no single branch becomes too powerful. For example, the President can veto legislation, but Congress can override with a supermajority." },
+            { id: 21, level: 2, question: "What was the primary purpose of the 13th Amendment?", options: ["Extend citizenship rights", "Abolish slavery nationwide", "Grant voting rights to freed slaves", "End Reconstruction"], correctIndex: 1, explanation: "Ratified in 1865, the 13th Amendment permanently abolished slavery in the United States, though with narrow criminal exceptions." },
+            { id: 22, level: 2, question: "Which Supreme Court case established judicial review?", options: ["Marbury v. Madison", "McCulloch v. Maryland", "Gibbons v. Ogden", "Plessy v. Ferguson"], correctIndex: 0, explanation: "Marbury v. Madison (1803) established that courts can strike down unconstitutional laws, fundamentally empowering the judiciary." },
+            { id: 23, level: 2, question: "What did the Commerce Clause in Article I authorize?", options: ["The President to regulate international trade", "Congress to regulate interstate commerce", "States to tax imports equally", "The Supreme Court to approve all trade agreements"], correctIndex: 1, explanation: "The Commerce Clause grants Congress broad power to regulate interstate and international trade, enabling federal economic regulation." },
+            { id: 24, level: 2, question: "Memorial Day originally commemorated soldiers from which conflict?", options: ["Revolutionary War", "Civil War", "World War I", "Korean War"], correctIndex: 1, explanation: "Decoration Day, now Memorial Day, began after the Civil War to honor fallen soldiers. It evolved into a national day of remembrance." },
+            { id: 25, level: 2, question: "What does the Second Amendment protect?", options: ["Right to free speech", "Right to bear arms", "Right to privacy", "Right to petition government"], correctIndex: 1, explanation: "The Second Amendment protects the right to keep and bear arms. Its exact scope and modern application remain subjects of constitutional debate." },
+            { id: 26, level: 2, question: "Which power belongs exclusively to the House of Representatives?", options: ["Confirm Supreme Court justices", "Ratify treaties", "Impeach federal officials", "Try impeachment cases"], correctIndex: 2, explanation: "Only the House can impeach (bring charges). The Senate then holds trial to determine if conviction and removal should occur." },
+            { id: 27, level: 2, question: "The Great Compromise at the Constitutional Convention created:", options: ["Three separate branches of government", "A bicameral legislature with different representation methods", "The Electoral College", "Separation of church and state"], correctIndex: 1, explanation: "The Great Compromise combined the Virginia Plan (representation by population) and New Jersey Plan (equal state representation) into a bicameral Congress." },
+            { id: 28, level: 2, question: "What is the term length for a U.S. House representative?", options: ["2 years", "4 years", "6 years", "10 years"], correctIndex: 0, explanation: "House members serve 2-year terms, making them directly accountable to voters and responsive to current public sentiment." },
+            { id: 29, level: 2, question: "Which Supreme Court case upheld the power of the federal government to regulate interstate commerce?", options: ["Lochner v. New York", "Gibbons v. Ogden", "Wickard v. Filburn", "United States v. Lopez"], correctIndex: 1, explanation: "Gibbons v. Ogden (1824) established that Congress has broad authority to regulate commerce that affects interstate relations." },
+            { id: 30, level: 2, question: "What did the 16th Amendment enable Congress to do?", options: ["Regulate interstate commerce", "Levy an income tax", "Create a central bank", "Establish federal courts"], correctIndex: 1, explanation: "The 16th Amendment (1913) authorized Congress to levy a federal income tax without apportionment among states. This became a major revenue source." },
+
+            // ===== FOUNDER LEVEL (30 questions) =====
+            { id: 31, level: 3, question: "How does the doctrine of 'incorporation' relate to the 14th Amendment?", options: ["It allows states to opt out of federal protections", "It extends Bill of Rights protections to states through the Due Process Clause", "It permits Congress to override state constitutions", "It creates different rights for federal and state citizens"], correctIndex: 1, explanation: "Incorporation doctrine holds that most Bill of Rights protections apply to the states through the 14th Amendment's Due Process Clause. This evolved through Supreme Court precedent starting in the early 1900s." },
+            { id: 32, level: 3, question: "What was the constitutional crisis resolved by the 12th Amendment?", options: ["Dispute over slavery in new territories", "Confusion about electing President and Vice President", "Conflict over state vs. federal power", "Question of judicial supremacy"], correctIndex: 1, explanation: "The 12th Amendment (1804) corrected the Electoral College system after the 1800 election confusion, requiring separate ballots for President and Vice President." },
+            { id: 33, level: 3, question: "The Commerce Clause has been used by Congress to regulate which of the following?", options: ["Only interstate trade", "Interstate trade and activities substantially affecting interstate commerce", "Activities wholly within a single state", "Only activities involving foreign nations"], correctIndex: 1, explanation: "Modern Commerce Clause jurisprudence permits regulation of local activities that substantially affect interstate commerce, as established in cases like Wickard v. Filburn (1942)." },
+            { id: 34, level: 3, question: "How did the 14th Amendment's Equal Protection Clause transform constitutional law?", options: ["It eliminated state sovereignty entirely", "It became the basis for striking down discriminatory laws and later expanded civil rights protections", "It granted the federal government unlimited power", "It was quickly overturned by subsequent amendments"], correctIndex: 1, explanation: "The Equal Protection Clause (ratified 1868) has become central to civil rights law, used to challenge racial discrimination, gender discrimination, and other classifications." },
+            { id: 35, level: 3, question: "What is the constitutional significance of Marbury v. Madison (1803)?", options: ["It established presidential term limits", "It created the power of judicial review, allowing courts to strike down unconstitutional laws", "It ended slavery", "It established the Electoral College"], correctIndex: 1, explanation: "Chief Justice John Marshall's opinion in Marbury v. Madison established judicial review—arguably the most important Supreme Court power—fundamentally shaping American constitutionalism." },
+            { id: 36, level: 3, question: "How does federalism balance power between national and state governments?", options: ["The federal government holds all authority", "States hold all authority and delegate to the federal government", "Powers are divided: some delegated to the federal government, others reserved to the states", "The Constitution doesn't address this division"], correctIndex: 2, explanation: "Federalism divides power through enumerated powers (federal), reserved powers (states), and concurrent powers. The 10th Amendment emphasizes this division." },
+            { id: 37, level: 3, question: "What was the constitutional compromise regarding slavery at the 1787 Convention?", options: ["Slavery was immediately abolished", "The Three-Fifths Compromise counted enslaved persons as 3/5 of a person for representation and taxation", "Slavery was left entirely to state decision", "The Constitution explicitly protected slavery"], correctIndex: 1, explanation: "The Three-Fifths Compromise counted enslaved persons for representation and taxation purposes, bolstering Southern power while the Constitution protected slavery indirectly." },
+            { id: 38, level: 3, question: "How does the principle of separation of powers limit government tyranny?", options: ["By concentrating all power in one branch", "By dividing power among three co-equal branches with checks on each other", "By giving Congress supreme authority", "By removing checks on executive power"], correctIndex: 1, explanation: "Separation of powers prevents tyranny by ensuring no branch becomes too powerful. Each branch can check the others' overreach, as Madison explained in Federalist No. 51." },
+            { id: 39, level: 3, question: "What was the constitutional impact of McCulloch v. Maryland (1819)?", options: ["It limited federal power to enumerated powers only", "It upheld Congress's implied powers and federal supremacy in areas of federal authority", "It abolished the Bank of the United States", "It granted states veto power over federal laws"], correctIndex: 1, explanation: "Chief Justice Marshall's opinion upheld the 'necessary and proper' clause, establishing that Congress has implied powers beyond those explicitly enumerated and that federal law supersedes conflicting state law." },
+            { id: 40, level: 3, question: "How did the ratification debates reveal the Constitution's tensions regarding power?", options: ["They were unanimous with no disagreement", "Federalists and Anti-Federalists debated the balance between centralized national power and state sovereignty", "They focused only on slavery", "They occurred decades after ratification"], correctIndex: 1, explanation: "Federalist essays (Hamilton, Madison, Jay) defended centralized power, while Anti-Federalists feared tyranny and favored state power. This tension persists in American constitutional law." },
+            { id: 41, level: 3, question: "What does the phrase 'the natural rights of mankind' mean in Founding contexts?", options: ["Rights invented by government", "Inherent rights to life, liberty, and property that exist prior to government", "Rights granted only to landowners", "Rights subject to majority vote"], correctIndex: 1, explanation: "Founding-era thinkers like Locke and Jefferson believed natural rights pre-exist government and cannot be justly violated. This philosophy underpins the Declaration and Constitution." },
+            { id: 42, level: 3, question: "How does the First Amendment's protection of speech serve self-governance?", options: ["It has no connection to democracy", "Free speech enables citizens to participate in political discourse and hold government accountable", "It only protects government speech", "It prevents individuals from speaking"], correctIndex: 1, explanation: "Free speech is essential to democracy—citizens need access to ideas and ability to express opinions to make informed political decisions and challenge governmental abuses." },
+            { id: 43, level: 3, question: "What constitutional principle underlies the right to petition the government?", options: ["Suppression of dissent", "Democratic accountability and the right to seek redress of grievances", "Monarchical authority", "Unlimited executive power"], correctIndex: 1, explanation: "The right to petition (First Amendment) reflects a founding principle that citizens must have access to government and ability to seek remedy for grievances." },
+            { id: 44, level: 3, question: "How does the Fourteenth Amendment's Due Process Clause constrain both federal and state government?", options: ["It only constrains state governments", "It applies to federal government through the Fifth Amendment; to states through the Fourteenth Amendment—requiring fair procedures and protecting substantive rights", "It doesn't constrain government at all", "It allows governments unlimited power"], correctIndex: 1, explanation: "Due Process Clauses in the Fifth and Fourteenth Amendments require both federal and state governments to provide fair procedures and protect fundamental liberties." },
+            { id: 45, level: 3, question: "What is the significance of the Ninth Amendment in constitutional interpretation?", options: ["It lists all rights citizens possess", "It suggests rights exist beyond those enumerated in the Constitution", "It grants government unlimited power", "It has been largely ignored and irrelevant"], correctIndex: 1, explanation: "The Ninth Amendment indicates that people retain rights not specified in the Constitution, suggesting a broader protection of liberty than explicit enumeration alone would imply." },
+            { id: 46, level: 3, question: "How has the interpretation of 'interstate commerce' expanded federal power?", options: ["It has remained narrowly limited to border transactions", "Modern precedent allows Congress to regulate local activities that substantially affect interstate commerce, greatly expanding federal authority", "It has been abolished", "States now control all commerce"], correctIndex: 1, explanation: "Cases like Wickard v. Filburn and Gonzales v. Raich show courts upholding federal regulation of activities with substantial economic effects, allowing broad federal commerce power." },
+            { id: 47, level: 3, question: "What was the constitutional purpose of the Bill of Rights?", options: ["To grant new rights to citizens", "To reassure states and citizens that fundamental liberties would be protected from government infringement", "To abolish state governments", "To increase executive power"], correctIndex: 1, explanation: "The first ten amendments were adopted to allay Anti-Federalist concerns and secure support for ratification by explicitly protecting fundamental freedoms." },
+            { id: 48, level: 3, question: "How does the Fifth Amendment protect against self-incrimination?", options: ["It requires confession under torture", "It prevents government from compelling individuals to testify against themselves", "It allows unlimited police interrogation", "It has been repealed"], correctIndex: 1, explanation: "The Fifth Amendment's protection against self-incrimination reflects the principle that government bears the burden of proof and cannot coerce admission of guilt." },
+            { id: 49, level: 3, question: "What constitutional tension exists between majority rule and protection of minority rights?", options: ["There is no tension; democracy is purely majoritarian", "The Constitution attempts to balance democratic decision-making with limits on majority power through separation of powers, federalism, and rights protections", "Minorities have no protection", "The Constitution ignores both"], correctIndex: 1, explanation: "American constitutionalism balances majority rule with constraints: federalism, separation of powers, and explicit rights protections prevent majoritarian tyranny." },
+            { id: 50, level: 3, question: "How did Founding-era thinkers justify limited government?", options: ["They believed government should be unlimited", "They contended government's powers derive from the consent of the governed and should be limited to protect natural rights", "They trusted concentrated power", "They rejected constitutional constraints"], correctIndex: 1, explanation: "Founders like Locke and Madison argued that legitimate government requires popular consent and should be constrained to protect liberty, not to enable tyranny." },
+            { id: 51, level: 3, question: "What is judicial restraint, and why did the Founders value it?", options: ["Judges should ignore constitutional limits", "Judges should defer to elected branches when interpretation is ambiguous and respect constitutional boundaries", "Courts should rule freely without constitutional limits", "The Founders opposed judicial review"], correctIndex: 1, explanation: "Judicial restraint—respecting constitutional text, precedent, and separation of powers—was valued to ensure courts serve law rather than impose their policy preferences." },
+            { id: 52, level: 3, question: "How does the concept of 'original intent' inform constitutional interpretation?", options: ["It's irrelevant to modern law", "It suggests the Constitution's meaning is fixed by its Framers' intent, informing how we interpret ambiguous provisions", "It requires changing the Constitution weekly", "It's only used by one political party"], correctIndex: 1, explanation: "Originalism and intent-based approaches hold that constitutional meaning derives from how the Framers understood their words, providing an anchor for interpretation." },
+            { id: 53, level: 3, question: "What role did the concept of 'tyranny of the majority' play in constitutional design?", options: ["The Founders didn't worry about it", "Fear of majoritarian overreach led to federalism, separation of powers, and minority protections (Bill of Rights)", "The Constitution maximizes majority power", "Minority rights weren't considered"], correctIndex: 1, explanation: "Founders like Madison (Federalist No. 10) recognized democracy's risk of majoritarian tyranny and designed the Constitution to check pure majority rule." },
+            { id: 54, level: 3, question: "How does the Establishment Clause protect religious liberty?", options: ["It establishes official state religion", "It prevents government from favoring or advancing religion, protecting religious freedom from state coercion", "It eliminates religious expression", "It requires atheism"], correctIndex: 1, explanation: "The Establishment Clause (part of First Amendment) bars government establishment of religion, while the Free Exercise Clause protects individual religious practice." },
+            { id: 55, level: 3, question: "What constitutional principle underlies limits on government's search and seizure powers?", options: ["Fourth Amendment protections are unnecessary", "Fourth Amendment protections reflect privacy and dignity rights, limiting government power to search without warrant or probable cause", "Government has unlimited search power", "The Constitution says nothing about searches"], correctIndex: 1, explanation: "Fourth Amendment protections (warrant requirement, probable cause, reasonableness standard) reflect that privacy is a fundamental liberty government cannot arbitrarily violate." },
+            { id: 56, level: 3, question: "How did the 14th Amendment change the federal-state relationship?", options: ["It strengthened state sovereignty exclusively", "It applied constitutional protections to state governments, fundamentally shifting power and duty to protect individual rights", "It eliminated states entirely", "It had no real effect"], correctIndex: 1, explanation: "The 14th Amendment's citizenship, due process, and equal protection clauses applied constitutional limits to state action, preventing state governments from violating fundamental rights." },
+            { id: 57, level: 3, question: "What is the significance of the Tenth Amendment?", options: ["It grants unlimited federal power", "It reserves powers not delegated to the federal government to the states and the people", "It abolishes state governments", "It's been repealed"], correctIndex: 1, explanation: "The Tenth Amendment (part of Bill of Rights) preserves federalism by reserving undelegated powers to states and the people, reinforcing limited federal government." },
+            { id: 58, level: 3, question: "How does the power of judicial review protect constitutional government?", options: ["It doesn't—it usurps power", "It ensures branches comply with constitutional limits and protects individual rights against majoritarian government action", "It concentrates power in courts", "It was rejected by the Founders"], correctIndex: 1, explanation: "Judicial review (Marbury v. Madison) allows courts to strike unconstitutional laws, serving as an essential check on executive and legislative overreach." },
+            { id: 59, level: 3, question: "What tension exists between individual liberty and collective security in constitutional law?", options: ["There's no tension", "The Constitution attempts to balance individual rights with legitimate government functions (security, order) but this balance remains contested", "Security always overrides liberty", "Liberty and security are identical"], correctIndex: 1, explanation: "Constitutional law perpetually negotiates between protecting individual liberty and enabling government to provide security and order—no perfect resolution exists." },
+            { id: 60, level: 3, question: "How do 'inalienable rights' constrain government power?", options: ["They don't—government power is unlimited", "They represent freedoms so fundamental that government cannot justly violate them, even through majority vote", "They only apply to government officials", "They were rejected by the Founders"], correctIndex: 1, explanation: "The Declaration's invocation of inalienable rights reflects the principle that certain liberties are so fundamental that government cannot legitimately violate them, even democratically." }
+        ];
 
         function shuffle(array) {
             let arr = [...array];
@@ -231,91 +280,77 @@
             currentLevel = level;
             const numQuestions = level === 1 ? 5 : level === 2 ? 8 : 10;
 
-            let available = questions.filter(q => !usedQuestionIds.has(q.id));
-            if (available.length < numQuestions) {
+            // Filter questions by level and exclude used ones
+            let available = questions.filter(q => q.level === level && !usedQuestionIds.has(q.id));
+
+            if (available.length === 0) {
                 usedQuestionIds.clear();
-                available = questions;
+                localStorage.removeItem('afs_usedQuestionIds');
+                available = questions.filter(q => q.level === level);
             }
 
-            currentQuestions = shuffle(available).slice(0, numQuestions);
+            currentQuestions = shuffle(available).slice(0, Math.min(numQuestions, available.length));
             currentQuestionIndex = 0;
             score = 0;
-            selectedButton = null;
 
             document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
             document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
 
-            const levelLabel = level === 1 ? 'Beginner' : level === 2 ? 'Intermediate' : 'Advanced';
-            document.getElementById('level-badge').textContent = `LEVEL ${level} • ${levelLabel}`;
+            const levelNames = {1: 'Citizen', 2: 'Patriot', 3: 'Founder'};
+            document.getElementById('level-badge').innerHTML = `LEVEL ${level} • ${levelNames[level]}`;
             loadQuestion();
         }
 
         function loadQuestion() {
             const q = currentQuestions[currentQuestionIndex];
-            document.getElementById('question-text').textContent = q.question;
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-
-            const shuffledIndices = shuffle([0, 1, 2, 3]);
-            shuffledIndices.forEach((idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn w-full text-left px-4 py-3 border border-gray-300 rounded-2xl transition-all';
-                btn.textContent = q.options[idx];
-                btn.dataset.index = idx;
-                btn.onclick = () => selectOption(btn);
-                container.appendChild(btn);
-            });
-
-            document.getElementById('explanation-box').classList.add('hidden');
-            document.getElementById('submit-btn').classList.remove('hidden');
-            document.getElementById('submit-btn').disabled = true;
-            document.getElementById('next-btn').classList.add('hidden');
-
-            selectedButton = null;
+            document.getElementById('question-text').innerHTML = q.question;
+            document.getElementById('question-counter').innerHTML = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('score-display').innerHTML = `Score: ${score}`;
 
             const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
             document.getElementById('progress-bar').style.width = progress + '%';
-            document.getElementById('question-counter').textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
-            document.getElementById('score-display').textContent = `Score: ${score}`;
-        }
 
-        function selectOption(btn) {
-            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedButton = btn;
-            document.getElementById('submit-btn').disabled = false;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('submit-btn').classList.remove('hidden');
+            selectedButton = null;
+
+            let optionData = q.options.map((text, idx) => ({ text, isCorrect: idx === q.correctIndex }));
+            optionData = shuffle(optionData);
+
+            optionData.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full text-left px-5 py-3.5 border border-green-200 rounded-2xl flex items-center gap-x-3 text-sm hover:border-green-400`;
+                btn.innerHTML = `<span class="flex-1">${opt.text}</span>`;
+                btn.dataset.correct = opt.isCorrect;
+                btn.onclick = () => {
+                    document.querySelectorAll('#options-container button').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedButton = btn;
+                    document.getElementById('submit-btn').disabled = false;
+                };
+                container.appendChild(btn);
+            });
         }
 
         function submitAnswer() {
             if (!selectedButton) return;
-
+            const isCorrect = selectedButton.dataset.correct === 'true';
+            document.querySelectorAll('#options-container button').forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.correct === 'true') btn.classList.add('correct');
+                else if (btn === selectedButton && !isCorrect) btn.classList.add('incorrect');
+            });
+            if (isCorrect) score++;
             const q = currentQuestions[currentQuestionIndex];
-            const selectedIndex = parseInt(selectedButton.dataset.index);
-            const isCorrect = selectedIndex === q.correctIndex;
-
-            if (isCorrect) {
-                score++;
-                selectedButton.classList.add('correct');
-                usedQuestionIds.add(q.id);
-            } else {
-                selectedButton.classList.add('incorrect');
-                document.querySelectorAll('.option-btn').forEach(btn => {
-                    if (parseInt(btn.dataset.index) === q.correctIndex) {
-                        btn.classList.add('correct');
-                    }
-                });
-            }
-
-            document.getElementById('explanation-text').textContent = q.explanation;
+            document.getElementById('explanation-text').innerHTML = q.explanation;
             document.getElementById('explanation-box').classList.remove('hidden');
             document.getElementById('submit-btn').classList.add('hidden');
             document.getElementById('next-btn').classList.remove('hidden');
-
-            document.querySelectorAll('.option-btn').forEach(btn => btn.onclick = null);
-
-            saveUsedQuestions();
         }
 
         function nextQuestion() {
@@ -323,47 +358,67 @@
             if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
-                showResults();
+                finishRound();
             }
         }
 
-        function showResults() {
+        function finishRound() {
+            currentQuestions.forEach(q => usedQuestionIds.add(q.id));
+            localStorage.setItem('afs_usedQuestionIds', JSON.stringify(Array.from(usedQuestionIds)));
+
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.remove('hidden');
 
-            const levelLabel = currentLevel === 1 ? 'Beginner' : currentLevel === 2 ? 'Intermediate' : 'Advanced';
-            document.getElementById('results-level').textContent = `${levelLabel} Level`;
+            const percent = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('final-score').innerHTML = score;
+            document.getElementById('total-questions').innerHTML = currentQuestions.length;
 
-            document.getElementById('final-score').textContent = score;
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-
-            const percentage = (score / currentQuestions.length) * 100;
-            const badge = document.getElementById('percentage-badge');
-            badge.textContent = `${Math.round(percentage)}%`;
-
-            if (percentage >= 80) {
-                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700';
-            } else if (percentage >= 60) {
-                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-yellow-100 text-yellow-700';
-            } else {
-                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-orange-100 text-orange-700';
-            }
+            const levelNames = {1: 'Citizen', 2: 'Patriot', 3: 'Founder'};
+            document.getElementById('results-level').innerHTML = `${levelNames[currentLevel]} Level • ${currentQuestions.length} questions`;
         }
 
         function resetToWelcome() {
-            document.getElementById('welcome-screen').classList.remove('hidden');
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('hidden');
+        }
+
+        function resetQuestionPool() {
+            if (confirm('This will reset all used questions and allow you to retake questions you\'ve already answered. Continue?')) {
+                usedQuestionIds.clear();
+                localStorage.removeItem('afs_usedQuestionIds');
+                alert('Question pool reset. You can now start fresh!');
+                resetToWelcome();
+            }
         }
 
         function showUsedStatus() {
-            loadUsedQuestions();
-            alert(`Questions used: ${usedQuestionIds.size} out of ${questions.length}\n\nNote: Question pool will reset when all questions are exhausted.`);
+            const totalByLevel = {
+                1: questions.filter(q => q.level === 1).length,
+                2: questions.filter(q => q.level === 2).length,
+                3: questions.filter(q => q.level === 3).length
+            };
+            const usedByLevel = {
+                1: questions.filter(q => q.level === 1 && usedQuestionIds.has(q.id)).length,
+                2: questions.filter(q => q.level === 2 && usedQuestionIds.has(q.id)).length,
+                3: questions.filter(q => q.level === 3 && usedQuestionIds.has(q.id)).length
+            };
+
+            let status = "📊 Question Pool Status\n\n";
+            status += `Citizen Level: ${usedByLevel[1]}/${totalByLevel[1]} used\n`;
+            status += `Patriot Level: ${usedByLevel[2]}/${totalByLevel[2]} used\n`;
+            status += `Founder Level: ${usedByLevel[3]}/${totalByLevel[3]} used\n`;
+            status += `\nTotal: ${usedQuestionIds.size}/${questions.length} questions used across all levels`;
+
+            alert(status);
         }
 
-        loadUsedQuestions();
-        initializeTailwind();
-    </script>
+        function initializeApp() {
+            const saved = localStorage.getItem('afs_usedQuestionIds');
+            if (saved) usedQuestionIds = new Set(JSON.parse(saved));
+        }
 
+        window.onload = initializeApp;
+    </script>
 </body>
 </html>
