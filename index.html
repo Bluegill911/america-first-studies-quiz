@@ -1,0 +1,757 @@
+:root {
+            --forest-green: #166534;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .forest-header {
+            background-color: #166534;
+            background-image: linear-gradient(to right, #166534, #14532d);
+        }
+
+        .quiz-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn {
+            transition: all 0.15s ease;
+        }
+        
+        .option-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        
+        .option-btn.selected {
+            border-color: #166534;
+            background-color: #f0fdf4;
+            box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+        }
+        
+        .option-btn.correct {
+            border-color: #166534;
+            background-color: #dcfce7;
+        }
+        
+        .option-btn.incorrect {
+            border-color: #dc2626;
+            background-color: #fee2e2;
+        }
+
+        .progress-bar {
+            transition: width 0.4s ease;
+        }
+
+        .section-transition {
+            animation: fadeInScale 0.3s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .forest-btn {
+            background-color: #166534;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .forest-btn:hover {
+            background-color: #14532d;
+            transform: translateY(-1px);
+        }
+
+        .forest-btn:disabled {
+            background-color: #86efac;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="bg-green-50 text-gray-800">
+    <!-- Header -->
+    <header class="forest-header text-white shadow-lg">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-11 h-11 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-landmark text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">America First Studies</h1>
+                    <p class="text-green-200 text-sm -mt-1">Knowledge Assessment Platform</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-x-2 text-sm">
+                <div class="px-3 py-1.5 bg-white/10 rounded-2xl flex items-center gap-x-2 text-xs">
+                    <i class="fa-solid fa-globe fa-fw"></i>
+                    <span>United States History &amp; Civics</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
+        
+        <!-- WELCOME SCREEN -->
+        <div id="welcome-screen">
+            <div class="max-w-2xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-green-100 text-green-800 rounded-3xl text-sm font-medium mb-4">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Interactive Learning Tool</span>
+                </div>
+                <h2 class="text-4xl font-semibold tracking-tighter heading-serif text-green-900">Test &amp; Strengthen Your Civic Knowledge</h2>
+                <p class="mt-4 text-lg text-gray-600">Randomized questions. No repeats across rounds or levels. Professional forest green interface.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <!-- Level Cards -->
+                <div onclick="selectLevel(1)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 1</div>
+                            <div class="text-2xl font-semibold mt-1">Beginner</div>
+                        </div>
+                        <i class="fa-solid fa-seedling text-3xl text-green-600 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">5 questions • Foundational concepts, Constitution basics, and key historical figures.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">Recommended for review</div>
+                </div>
+
+                <div onclick="selectLevel(2)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 2</div>
+                            <div class="text-2xl font-semibold mt-1">Intermediate</div>
+                        </div>
+                        <i class="fa-solid fa-tree text-3xl text-green-600 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">8 questions • Amendments, Progressive Era, Supreme Court cases, and Federalist principles.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">Most popular</div>
+                </div>
+
+                <div onclick="selectLevel(3)" class="cursor-pointer group bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 3</div>
+                            <div class="text-2xl font-semibold mt-1">Advanced</div>
+                        </div>
+                        <i class="fa-solid fa-mountain text-3xl text-green-600 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">10 questions • Deeper analysis of constitutional structure, civil rights, and historical context.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">For mastery</div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="showUsedStatus()" 
+                        class="text-sm px-5 py-2.5 text-green-700 hover:text-green-800 flex items-center gap-x-2 mx-auto">
+                    <i class="fa-solid fa-history"></i>
+                    <span>View Question Pool Status</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen" class="hidden max-w-3xl mx-auto">
+            <div class="flex items-center justify-between mb-4 px-1">
+                <div>
+                    <span id="level-badge" 
+                          class="inline-flex items-center px-3.5 py-1 rounded-2xl text-xs font-semibold bg-green-800 text-white"></span>
+                    <span id="question-counter" class="ml-3 text-sm font-medium text-gray-500"></span>
+                </div>
+                <div class="flex items-center gap-x-2 text-sm">
+                    <div class="px-3 py-1 bg-white border border-green-200 rounded-2xl flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-tachometer-alt text-green-700"></i>
+                        <span id="score-display" class="font-semibold">Score: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="h-2 bg-green-100 rounded-full mb-6 overflow-hidden">
+                <div id="progress-bar" class="h-2 bg-green-700 rounded-full progress-bar" style="width: 0%"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="quiz-card bg-white border border-green-200 rounded-3xl p-8 shadow-sm">
+                <div id="question-text" class="question-text font-medium text-gray-900 leading-snug mb-8"></div>
+
+                <!-- Options -->
+                <div id="options-container" class="space-y-3"></div>
+
+                <!-- Explanation -->
+                <div id="explanation-box" class="hidden mt-6 p-5 bg-green-50 border border-green-200 rounded-2xl text-sm">
+                    <div class="flex gap-x-3">
+                        <i class="fa-solid fa-info-circle text-green-700 mt-0.5"></i>
+                        <div>
+                            <div class="font-semibold text-green-800 mb-1">Explanation</div>
+                            <div id="explanation-text" class="text-gray-700"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-between items-center mt-6 px-1">
+                <button onclick="resetToWelcome()" 
+                        class="px-5 py-2.5 text-sm flex items-center gap-x-2 text-gray-500 hover:text-gray-700">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Exit Quiz</span>
+                </button>
+
+                <div class="flex gap-x-3">
+                    <button id="submit-btn"
+                            onclick="submitAnswer()"
+                            class="forest-btn px-8 py-2.5 rounded-2xl font-medium text-sm disabled:opacity-60 flex items-center gap-x-2"
+                            disabled>
+                        <span>Check Answer</span>
+                    </button>
+                    
+                    <button id="next-btn"
+                            onclick="nextQuestion()"
+                            class="hidden px-8 py-2.5 rounded-2xl font-medium text-sm border border-green-700 text-green-700 hover:bg-green-50">
+                        Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="results-screen" class="hidden max-w-2xl mx-auto">
+            <div class="bg-white border border-green-200 rounded-3xl p-8 text-center">
+                <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-trophy text-4xl text-green-700"></i>
+                </div>
+                
+                <h3 class="text-3xl font-semibold tracking-tight">Round Complete</h3>
+                <p id="results-level" class="text-green-700 mt-1"></p>
+
+                <div class="my-8">
+                    <div class="text-7xl font-semibold tabular-nums text-green-900" id="final-score">0</div>
+                    <div class="text-lg text-gray-500">correct out of <span id="total-questions"></span></div>
+                    <div class="mt-2">
+                        <span id="percentage-badge" 
+                              class="inline-block px-4 py-1 rounded-2xl text-sm font-semibold"></span>
+                    </div>
+                </div>
+
+                <div id="performance-message" class="max-w-xs mx-auto text-sm text-gray-600 mb-8"></div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="startNewRound(currentLevel)" 
+                            class="forest-btn w-full py-3 rounded-2xl font-medium flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-redo"></i>
+                        <span>Start New Round (Avoid Repeats)</span>
+                    </button>
+                    
+                    <button onclick="resetToWelcome()" 
+                            class="w-full py-3 rounded-2xl font-medium border border-green-300 text-green-700 hover:bg-green-50 flex items-center justify-center gap-x-2">
+                        <span>Change Level or Exit</span>
+                    </button>
+                </div>
+
+                <div class="mt-6 pt-6 border-t text-xs text-gray-500 flex justify-center gap-x-4">
+                    <button onclick="resetQuestionPool()" class="hover:text-green-700 flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-sync fa-sm"></i>
+                        <span>Reset Question Pool</span>
+                    </button>
+                    <button onclick="showUsedStatus()" class="hover:text-green-700">View Pool Status</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="max-w-5xl mx-auto px-6 pb-8 text-center text-xs text-gray-400">
+        Built for educational use • America First Studies • Forest green theme • All questions randomized with no repetition across rounds
+    </footer>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --forest-green: #166534;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .forest-header {
+            background-color: #166534;
+            background-image: linear-gradient(to right, #166534, #14532d);
+        }
+
+        .quiz-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn {
+            transition: all 0.15s ease;
+        }
+        
+        .option-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        
+        .option-btn.selected {
+            border-color: #166534;
+            background-color: #f0fdf4;
+            box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+        }
+        
+        .option-btn.correct {
+            border-color: #166534;
+            background-color: #dcfce7;
+        }
+        
+        .option-btn.incorrect {
+            border-color: #dc2626;
+            background-color: #fee2e2;
+        }
+
+        .progress-bar {
+            transition: width 0.4s ease;
+        }
+
+        .section-transition {
+            animation: fadeInScale 0.3s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .forest-btn {
+            background-color: #166534;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .forest-btn:hover {
+            background-color: #14532d;
+            transform: translateY(-1px);
+        }
+
+        .forest-btn:disabled {
+            background-color: #86efac;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.5;
+        }
+    </style>
+    <script>
+        // Tailwind configuration - Forest Green theme
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent-green', '#166534');
+            
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'forest': {
+                                50: '#f0fdf4',
+                                100: '#dcfce7',
+                                700: '#166534',
+                                800: '#14532d',
+                                900: '#052e16'
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        // Question Bank - 12 high-quality questions (expandable)
+        const questions = [
+            {
+                id: 1,
+                question: "Who is recognized as the primary author of the Declaration of Independence?",
+                options: ["Thomas Jefferson", "John Adams", "Benjamin Franklin", "James Madison"],
+                correctIndex: 0,
+                explanation: "Thomas Jefferson was the principal author. The Committee of Five (including Adams and Franklin) made revisions before adoption on July 4, 1776.",
+                difficulty: 1
+            },
+            {
+                id: 2,
+                question: "Which amendment to the U.S. Constitution guarantees citizenship, due process, and equal protection of the laws?",
+                options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"],
+                correctIndex: 1,
+                explanation: "The 14th Amendment (1868) defines citizenship and prohibits states from depriving any person of life, liberty, or property without due process or equal protection.",
+                difficulty: 2
+            },
+            {
+                id: 3,
+                question: "In what year was the U.S. Constitution signed at the Constitutional Convention?",
+                options: ["1776", "1781", "1787", "1791"],
+                correctIndex: 2,
+                explanation: "Delegates signed the Constitution on September 17, 1787, in Philadelphia. It replaced the weaker Articles of Confederation.",
+                difficulty: 1
+            },
+            {
+                id: 4,
+                question: "How many amendments comprise the Bill of Rights?",
+                options: ["8", "10", "12", "27"],
+                correctIndex: 1,
+                explanation: "The first ten amendments, known as the Bill of Rights, were ratified in 1791 to protect fundamental individual liberties.",
+                difficulty: 1
+            },
+            {
+                id: 5,
+                question: "Which President is most associated with Progressive Era trust-busting and national conservation efforts?",
+                options: ["Woodrow Wilson", "Theodore Roosevelt", "William Howard Taft", "Franklin D. Roosevelt"],
+                correctIndex: 1,
+                explanation: "Theodore Roosevelt aggressively enforced antitrust laws and created numerous national parks and forests during his presidency.",
+                difficulty: 2
+            },
+            {
+                id: 6,
+                question: "What principle is established by the Supremacy Clause in Article VI?",
+                options: ["States' rights supremacy", "Federal law is the supreme law of the land", "Judicial review power", "Strict separation of powers"],
+                correctIndex: 1,
+                explanation: "The Supremacy Clause declares the Constitution, federal statutes, and treaties the supreme law of the land, binding on all state officials and judges.",
+                difficulty: 2
+            },
+            {
+                id: 7,
+                question: "The landmark 1954 Supreme Court decision Brown v. Board of Education addressed which issue?",
+                options: ["Voting rights for women", "Racial segregation in public schools", "Freedom of the press", "Right to legal counsel"],
+                correctIndex: 1,
+                explanation: "Brown v. Board of Education unanimously declared racial segregation in public schools unconstitutional, overturning the 'separate but equal' doctrine.",
+                difficulty: 2
+            },
+            {
+                id: 8,
+                question: "Who delivered the famous 'Give me liberty, or give me death!' speech in 1775?",
+                options: ["Thomas Paine", "Patrick Henry", "Samuel Adams", "John Hancock"],
+                correctIndex: 1,
+                explanation: "Patrick Henry gave this rousing address at the Second Virginia Convention to encourage support for independence from Britain.",
+                difficulty: 1
+            },
+            {
+                id: 9,
+                question: "Which article of the Constitution establishes the judicial branch?",
+                options: ["Article I", "Article II", "Article III", "Article IV"],
+                correctIndex: 2,
+                explanation: "Article III creates the Supreme Court and empowers Congress to establish inferior federal courts. It also defines treason and judicial tenure.",
+                difficulty: 2
+            },
+            {
+                id: 10,
+                question: "Which Progressive Era amendment provided for the direct election of U.S. Senators?",
+                options: ["16th Amendment (income tax)", "17th Amendment", "18th Amendment (Prohibition)", "19th Amendment (women's suffrage)"],
+                correctIndex: 1,
+                explanation: "The 17th Amendment (1913) moved the election of senators from state legislatures to direct popular vote, enhancing democratic accountability.",
+                difficulty: 2
+            },
+            {
+                id: 11,
+                question: "What was the primary purpose of the Federalist Papers?",
+                options: ["To declare American independence", "To promote ratification of the Constitution", "To propose the Bill of Rights", "To criticize British colonial policy"],
+                correctIndex: 1,
+                explanation: "Alexander Hamilton, James Madison, and John Jay wrote the 85 essays to persuade New York and other states to ratify the proposed Constitution.",
+                difficulty: 2
+            },
+            {
+                id: 12,
+                question: "Memorial Day originally commemorated soldiers who died in which conflict?",
+                options: ["Revolutionary War", "Civil War", "World War I", "World War II"],
+                correctIndex: 1,
+                explanation: "Decoration Day (later Memorial Day) began after the Civil War to honor Union and Confederate soldiers buried in military cemeteries.",
+                difficulty: 1
+            }
+        ];
+
+        // State variables
+        let currentLevel = 1;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedButton = null;
+        let usedQuestionIds = new Set();
+
+        // Load used questions from localStorage
+        function loadUsedQuestions() {
+            const saved = localStorage.getItem('afs_usedQuestionIds');
+            if (saved) {
+                usedQuestionIds = new Set(JSON.parse(saved));
+            }
+        }
+
+        function saveUsedQuestions() {
+            localStorage.setItem('afs_usedQuestionIds', JSON.stringify(Array.from(usedQuestionIds)));
+        }
+
+        // Fisher-Yates shuffle
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }
+
+        function selectLevel(level) {
+            currentLevel = level;
+            startNewRound(level);
+        }
+
+        function startNewRound(level) {
+            currentLevel = level;
+            const numQuestions = level === 1 ? 5 : level === 2 ? 8 : 10;
+
+            // Filter out used questions
+            let available = questions.filter(q => !usedQuestionIds.has(q.id));
+
+            if (available.length === 0) {
+                alert("All questions have been used in previous rounds. Please reset the question pool to continue.");
+                showUsedStatus();
+                return;
+            }
+
+            // Shuffle and select required number
+            currentQuestions = shuffle(available).slice(0, Math.min(numQuestions, available.length));
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedButton = null;
+
+            // Switch screens
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+
+            // Set level badge
+            const levelNames = {1: 'Beginner', 2: 'Intermediate', 3: 'Advanced'};
+            document.getElementById('level-badge').innerHTML = `LEVEL ${level} • ${levelNames[level]}`;
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question-text').innerHTML = q.question;
+            document.getElementById('question-counter').innerHTML = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('score-display').innerHTML = `Score: ${score}`;
+
+            updateProgress();
+
+            // Reset UI
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('submit-btn').classList.remove('hidden');
+            selectedButton = null;
+
+            // Create randomized answer buttons
+            let optionData = q.options.map((text, idx) => ({
+                text: text,
+                isCorrect: idx === q.correctIndex
+            }));
+            optionData = shuffle(optionData);
+
+            optionData.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full text-left px-5 py-3.5 border border-green-200 rounded-2xl hover:border-green-400 flex items-center gap-x-3 text-sm`;
+                btn.innerHTML = `
+                    <div class="w-6 h-6 flex-shrink-0 rounded-full border border-green-300 flex items-center justify-center text-xs font-mono text-green-700">
+                        ${String.fromCharCode(65 + index)}
+                    </div>
+                    <span class="flex-1">${opt.text}</span>
+                `;
+                btn.dataset.correct = opt.isCorrect;
+                btn.onclick = () => selectOption(btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(button) {
+            // Deselect all
+            document.querySelectorAll('#options-container button').forEach(b => {
+                b.classList.remove('selected', 'border-green-700');
+                b.classList.add('border-green-200');
+            });
+
+            // Select this one
+            button.classList.add('selected', 'border-green-700');
+            button.classList.remove('border-green-200');
+            selectedButton = button;
+
+            // Enable submit
+            document.getElementById('submit-btn').disabled = false;
+        }
+
+        function submitAnswer() {
+            if (!selectedButton) return;
+
+            const isCorrect = selectedButton.dataset.correct === 'true';
+            const allButtons = document.querySelectorAll('#options-container button');
+
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.correct === 'true') {
+                    btn.classList.add('correct', 'border-green-700');
+                    btn.classList.remove('border-green-200', 'selected');
+                } else if (btn === selectedButton && !isCorrect) {
+                    btn.classList.add('incorrect', 'border-red-600');
+                }
+            });
+
+            if (isCorrect) {
+                score++;
+                document.getElementById('score-display').innerHTML = `Score: ${score}`;
+            }
+
+            // Show explanation
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('explanation-text').innerHTML = q.explanation;
+            document.getElementById('explanation-box').classList.remove('hidden');
+
+            // Swap buttons
+            document.getElementById('submit-btn').classList.add('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                finishRound();
+            }
+        }
+
+        function finishRound() {
+            // Mark all questions in this round as used
+            currentQuestions.forEach(q => usedQuestionIds.add(q.id));
+            saveUsedQuestions();
+
+            // Hide quiz, show results
+            document.getElementById('quiz-screen').classList.add('hidden');
+            const resultsScreen = document.getElementById('results-screen');
+            resultsScreen.classList.remove('hidden');
+
+            const percent = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('final-score').innerHTML = score;
+            document.getElementById('total-questions').innerHTML = currentQuestions.length;
+
+            const badge = document.getElementById('percentage-badge');
+            badge.innerHTML = `${percent}% Mastery`;
+
+            if (percent >= 85) {
+                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-800';
+                document.getElementById('performance-message').innerHTML = 'Outstanding performance. You demonstrate strong command of the material.';
+            } else if (percent >= 70) {
+                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700';
+                document.getElementById('performance-message').innerHTML = 'Solid understanding. Continue reviewing to reach mastery level.';
+            } else {
+                badge.className = 'inline-block px-4 py-1 rounded-2xl text-sm font-semibold bg-amber-100 text-amber-700';
+                document.getElementById('performance-message').innerHTML = 'Good effort. Review the explanations and try another round to reinforce learning.';
+            }
+
+            document.getElementById('results-level').innerHTML = `Level ${currentLevel} • ${currentQuestions.length} questions completed`;
+        }
+
+        function resetToWelcome() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('hidden');
+        }
+
+        function resetQuestionPool() {
+            if (confirm('This will clear all used questions and allow the full bank to be used again. Continue?')) {
+                usedQuestionIds.clear();
+                localStorage.removeItem('afs_usedQuestionIds');
+                alert('Question pool has been reset. You may now start fresh rounds.');
+            }
+        }
+
+        function showUsedStatus() {
+            const total = questions.length;
+            const usedCount = usedQuestionIds.size;
+            const remaining = total - usedCount;
+
+            let html = `<div class="p-6 bg-white border border-green-200 rounded-3xl max-w-md mx-auto">`;
+            html += `<h4 class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-layer-group"></i> Question Pool Status</h4>`;
+            html += `<div class="space-y-2 text-sm">`;
+            html += `<div class="flex justify-between"><span>Total questions in bank</span><span class="font-mono">${total}</span></div>`;
+            html += `<div class="flex justify-between"><span>Questions used (across all rounds)</span><span class="font-mono text-red-600">${usedCount}</span></div>`;
+            html += `<div class="flex justify-between"><span>Remaining available</span><span class="font-mono text-green-700 font-semibold">${remaining}</span></div>`;
+            html += `</div>`;
+            html += `<div class="mt-5 text-xs text-gray-500">Questions are permanently excluded from new rounds until you reset the pool.</div>`;
+            html += `<button onclick="this.closest('.p-6').remove()" class="mt-4 w-full py-2 text-sm border border-green-300 rounded-2xl hover:bg-green-50">Close</button>`;
+            html += `</div>`;
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-6';
+            modal.innerHTML = html;
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+            document.body.appendChild(modal);
+        }
+
+        // PWA install support (basic)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        // Initialize everything
+        function initializeApp() {
+            initializeTailwind();
+            loadUsedQuestions();
+
+            // Keyboard support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const submitBtn = document.getElementById('submit-btn');
+                    const nextBtn = document.getElementById('next-btn');
+                    
+                    if (!submitBtn.classList.contains('hidden') && !submitBtn.disabled) {
+                        submitAnswer();
+                    } else if (!nextBtn.classList.contains('hidden')) {
+                        nextQuestion();
+                    }
+                }
+            });
+
+            // Make sure welcome is visible on load
+            document.getElementById('welcome-screen').classList.remove('hidden');
+            console.log('%c[AFS Quiz] Forest green quiz application initialized successfully.', 'color:#166534');
+        }
+
+        // Boot application
+        window.onload = initializeApp;
+    </script>
+</body>
+</html>
