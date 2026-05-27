@@ -7,51 +7,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-    
-    :root {
-      --green-900: #14532d;
-    }
-    
-    body {
-      font-family: 'Inter', system_ui, sans-serif;
-    }
-    
-    .heading-serif {
-      font-family: 'Playfair Display', Georgia, serif;
-    }
+    body { font-family: 'Inter', system_ui, sans-serif; }
+    .heading-serif { font-family: 'Playfair Display', Georgia, serif; }
 
     .forest-header {
       background: linear-gradient(to right, #14532d, #166534);
     }
 
-    .quiz-card {
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .option-btn {
-      transition: all 0.1s ease;
-    }
-    
-    .option-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    }
-
-    .correct-answer {
-      background-color: #dcfce7 !important;
-      border-color: #4ade80 !important;
+    .eagle {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       color: #166534;
     }
 
-    .wrong-answer {
-      background-color: #fee2e2 !important;
-      border-color: #f87171 !important;
-      color: #991b1b;
-    }
+    .eagle-small  { font-size: 26px; }
+    .eagle-medium { font-size: 40px; color: #14532d; }
+    .eagle-large  { font-size: 56px; color: #052e16; text-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+    .eagle-max    { font-size: 72px; color: #052e16; text-shadow: 0 0 16px rgba(16, 185, 129, 0.6); }
   </style>
 </head>
 <body class="bg-green-50 text-gray-800">
+
   <!-- Header -->
   <header class="forest-header text-white shadow-lg">
     <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -64,17 +39,12 @@
           <p class="text-green-200 text-sm -mt-1">Knowledge Assessment Platform</p>
         </div>
       </div>
-      <div class="hidden md:flex items-center gap-x-2 text-sm">
-        <div class="px-3 py-1.5 bg-white/10 rounded-2xl flex items-center gap-x-2">
-          <i class="fa-solid fa-globe"></i>
-          <span>United States History &amp; Civics</span>
-        </div>
-      </div>
     </div>
   </header>
 
   <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
-    <!-- Title Section -->
+
+    <!-- Title -->
     <div class="text-center mb-10">
       <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter heading-serif text-green-900">Test &amp; Strengthen Your Civic Knowledge</h2>
       <p class="subtitle bg-green-900 text-white border border-green-800 rounded-2xl px-8 py-4 text-xl font-semibold inline-block mt-4 shadow-lg">America First Studies Knowledge Quiz</p>
@@ -83,7 +53,6 @@
     <!-- Level Selection -->
     <div id="level-selection" class="max-w-4xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Citizen -->
         <div onclick="selectLevel(1)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
           <div class="flex justify-between items-start">
             <div>
@@ -96,7 +65,6 @@
           <div class="mt-6 text-sm text-green-700 font-medium">20 questions</div>
         </div>
 
-        <!-- Patriot -->
         <div onclick="selectLevel(2)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
           <div class="flex justify-between items-start">
             <div>
@@ -109,7 +77,6 @@
           <div class="mt-6 text-sm text-green-700 font-medium">20 questions</div>
         </div>
 
-        <!-- Founder -->
         <div onclick="selectLevel(3)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
           <div class="flex justify-between items-start">
             <div>
@@ -127,17 +94,17 @@
     <!-- Quiz Container -->
     <div id="quiz-container" class="hidden max-w-3xl mx-auto mt-8">
       <div class="bg-white rounded-3xl shadow-xl border border-green-100 p-8">
-        <!-- Progress -->
+
+        <!-- Top Bar: Eagle + Score -->
         <div class="flex justify-between items-center mb-6">
-          <div>
+          <div class="flex items-center gap-x-3">
+            <i id="eagle-icon" class="fa-solid fa-eagle eagle eagle-small"></i>
             <span id="current-level-name" class="font-semibold text-green-800"></span>
-            <span class="text-gray-400 mx-2">•</span>
-            <span id="question-counter" class="text-sm font-medium text-gray-500"></span>
           </div>
-          <button onclick="endQuiz()" class="text-sm px-4 py-2 text-red-600 hover:bg-red-50 rounded-2xl flex items-center gap-x-2">
-            <i class="fa-solid fa-times"></i>
-            <span>End Quiz</span>
-          </button>
+          <div class="flex items-center gap-x-2">
+            <div class="text-sm text-gray-500">Score:</div>
+            <div id="score-display" class="text-xl font-bold text-green-800">0</div>
+          </div>
         </div>
 
         <!-- Question -->
@@ -159,7 +126,7 @@
       </div>
     </div>
 
-    <!-- Results Screen -->
+    <!-- Results -->
     <div id="results-screen" class="hidden max-w-2xl mx-auto mt-8 text-center">
       <div class="bg-white rounded-3xl shadow-xl border border-green-100 p-10">
         <h3 class="text-3xl font-semibold text-green-900">Quiz Complete</h3>
@@ -167,17 +134,17 @@
           <div class="text-7xl font-bold text-green-800" id="final-score"></div>
           <div class="text-gray-500 mt-1">out of <span id="total-questions"></span></div>
         </div>
-        
         <button onclick="restartQuiz()" 
                 class="px-8 py-4 bg-green-800 hover:bg-green-900 text-white font-semibold rounded-2xl text-lg transition-colors">
           Start New Round
         </button>
       </div>
     </div>
+
   </div>
 
   <script>
-    // ========== FULL CLEAN QUESTIONS ARRAY ==========
+    // ==================== FULL QUESTIONS ====================
     const questions = [
       // CITIZEN (Easy)
       { id: 1, question: "Who was the first President of the United States?", options: ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"], correctIndex: 2 },
@@ -250,22 +217,39 @@
     let currentQuestions = [];
     let currentQuestionIndex = 0;
     let score = 0;
-    let usedQuestionIds = new Set();
+
+    function updateEagle() {
+      const eagle = document.getElementById('eagle-icon');
+      if (!eagle) return;
+
+      eagle.classList.remove('eagle-small', 'eagle-medium', 'eagle-large', 'eagle-max');
+
+      if (score >= 16) {
+        eagle.classList.add('eagle-max');
+      } else if (score >= 11) {
+        eagle.classList.add('eagle-large');
+      } else if (score >= 6) {
+        eagle.classList.add('eagle-medium');
+      } else {
+        eagle.classList.add('eagle-small');
+      }
+    }
 
     function selectLevel(level) {
       currentLevel = level;
       currentQuestions = getQuestionsForLevel(level);
       currentQuestionIndex = 0;
       score = 0;
-      usedQuestionIds.clear();
 
       document.getElementById('level-selection').classList.add('hidden');
       document.getElementById('quiz-container').classList.remove('hidden');
       document.getElementById('results-screen').classList.add('hidden');
 
       const levelNames = {1: "Citizen", 2: "Patriot", 3: "Founder"};
-      document.getElementById('current-level-name').innerText = levelNames[level] + " Level";
+      document.getElementById('current-level-name').innerText = levelNames[level];
+      document.getElementById('score-display').innerText = score;
 
+      updateEagle();
       loadQuestion();
     }
 
@@ -274,8 +258,6 @@
       if (level === 1) filtered = questions.filter(q => q.id <= 20);
       else if (level === 2) filtered = questions.filter(q => q.id >= 21 && q.id <= 40);
       else filtered = questions.filter(q => q.id >= 41);
-
-      // Shuffle
       return filtered.sort(() => Math.random() - 0.5);
     }
 
@@ -287,14 +269,14 @@
 
       const q = currentQuestions[currentQuestionIndex];
       document.getElementById('question-text').innerText = q.question;
-      document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+      document.getElementById('score-display').innerText = score;
 
       const optionsContainer = document.getElementById('options-container');
       optionsContainer.innerHTML = '';
 
       q.options.forEach((option, index) => {
         const btn = document.createElement('button');
-        btn.className = `option-btn w-full text-left px-6 py-4 border border-gray-200 rounded-2xl hover:border-green-300 bg-white flex items-center gap-x-3`;
+        btn.className = `w-full text-left px-6 py-4 border border-gray-200 rounded-2xl hover:border-green-300 bg-white flex items-center gap-x-3`;
         btn.innerHTML = `
           <div class="w-8 h-8 flex-shrink-0 rounded-full border border-gray-300 flex items-center justify-center text-sm font-medium">${String.fromCharCode(65 + index)}</div>
           <div class="text-lg">${option}</div>
@@ -318,14 +300,16 @@
 
       if (selectedIndex === correctIndex) {
         score++;
-        buttonElement.classList.add('correct-answer');
-        feedback.innerHTML = `<div class="flex items-center gap-x-2 text-green-700"><i class="fa-solid fa-check-circle"></i> <span class="font-medium">Correct!</span></div>`;
+        buttonElement.classList.add('!bg-green-100', '!border-green-400');
+        feedback.innerHTML = `<span class="text-green-700 font-medium">Correct!</span>`;
       } else {
-        buttonElement.classList.add('wrong-answer');
-        allButtons[correctIndex].classList.add('correct-answer');
-        feedback.innerHTML = `<div class="flex items-center gap-x-2 text-red-700"><i class="fa-solid fa-times-circle"></i> <span class="font-medium">Incorrect.</span></div>`;
+        buttonElement.classList.add('!bg-red-100', '!border-red-400');
+        allButtons[correctIndex].classList.add('!bg-green-100', '!border-green-400');
+        feedback.innerHTML = `<span class="text-red-700 font-medium">Incorrect.</span>`;
       }
 
+      document.getElementById('score-display').innerText = score;
+      updateEagle();
       document.getElementById('next-btn').classList.remove('hidden');
     }
 
@@ -337,13 +321,12 @@
     function showResults() {
       document.getElementById('quiz-container').classList.add('hidden');
       document.getElementById('results-screen').classList.remove('hidden');
-
       document.getElementById('final-score').innerText = score;
       document.getElementById('total-questions').innerText = currentQuestions.length;
     }
 
     function endQuiz() {
-      if (confirm("Are you sure you want to end this quiz?")) {
+      if (confirm("End this quiz?")) {
         document.getElementById('quiz-container').classList.add('hidden');
         document.getElementById('level-selection').classList.remove('hidden');
       }
@@ -353,11 +336,6 @@
       document.getElementById('results-screen').classList.add('hidden');
       document.getElementById('level-selection').classList.remove('hidden');
     }
-
-    // Start on level selection by default
-    window.onload = function() {
-      console.log("Quiz loaded successfully");
-    };
   </script>
 </body>
 </html>
