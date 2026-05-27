@@ -14,15 +14,14 @@
       background: linear-gradient(to right, #14532d, #166534);
     }
 
-    .eagle {
+    .shield {
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      color: #166534;
     }
 
-    .eagle-small  { font-size: 26px; }
-    .eagle-medium { font-size: 40px; color: #14532d; }
-    .eagle-large  { font-size: 56px; color: #052e16; text-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
-    .eagle-max    { font-size: 72px; color: #052e16; text-shadow: 0 0 16px rgba(16, 185, 129, 0.6); }
+    .shield-small  { font-size: 26px; color: #4ade80; }
+    .shield-medium { font-size: 42px; color: #166534; }
+    .shield-large  { font-size: 58px; color: #052e16; text-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
+    .shield-max    { font-size: 76px; color: #052e16; text-shadow: 0 0 22px rgba(16, 185, 129, 0.75); }
   </style>
 </head>
 <body class="bg-green-50 text-gray-800">
@@ -95,10 +94,10 @@
     <div id="quiz-container" class="hidden max-w-3xl mx-auto mt-8">
       <div class="bg-white rounded-3xl shadow-xl border border-green-100 p-8">
 
-        <!-- Top Bar: Eagle + Score -->
+        <!-- Top Bar: Shield + Score -->
         <div class="flex justify-between items-center mb-6">
           <div class="flex items-center gap-x-3">
-            <i id="eagle-icon" class="fa-solid fa-eagle eagle eagle-small"></i>
+            <i id="shield-icon" class="fa-solid fa-shield-halved shield shield-small"></i>
             <span id="current-level-name" class="font-semibold text-green-800"></span>
           </div>
           <div class="flex items-center gap-x-2">
@@ -218,20 +217,20 @@
     let currentQuestionIndex = 0;
     let score = 0;
 
-    function updateEagle() {
-      const eagle = document.getElementById('eagle-icon');
-      if (!eagle) return;
+    function updateShield() {
+      const shield = document.getElementById('shield-icon');
+      if (!shield) return;
 
-      eagle.classList.remove('eagle-small', 'eagle-medium', 'eagle-large', 'eagle-max');
+      shield.classList.remove('shield-small', 'shield-medium', 'shield-large', 'shield-max');
 
       if (score >= 16) {
-        eagle.classList.add('eagle-max');
+        shield.classList.add('shield-max');
       } else if (score >= 11) {
-        eagle.classList.add('eagle-large');
+        shield.classList.add('shield-large');
       } else if (score >= 6) {
-        eagle.classList.add('eagle-medium');
+        shield.classList.add('shield-medium');
       } else {
-        eagle.classList.add('eagle-small');
+        shield.classList.add('shield-small');
       }
     }
 
@@ -249,7 +248,7 @@
       document.getElementById('current-level-name').innerText = levelNames[level];
       document.getElementById('score-display').innerText = score;
 
-      updateEagle();
+      updateShield();
       loadQuestion();
     }
 
@@ -309,7 +308,7 @@
       }
 
       document.getElementById('score-display').innerText = score;
-      updateEagle();
+      updateShield();
       document.getElementById('next-btn').classList.remove('hidden');
     }
 
