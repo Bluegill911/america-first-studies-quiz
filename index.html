@@ -1,21 +1,378 @@
-You are maintaining the America First Studies Knowledge Quiz.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#166534">
+    <title>America First Studies • Knowledge Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .heading-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .forest-header { background-color: #166534; background-image: linear-gradient(to right, #166534, #14532d); }
+        .option-btn { transition: all 0.15s ease; }
+        .option-btn:hover { transform: translateY(-1px); }
+        .option-btn.correct { border-color: #166534; background-color: #dcfce7; }
+        .option-btn.incorrect { border-color: #dc2626; background-color: #fee2e2; }
+        .option-btn:disabled { opacity: 0.85; }
+    </style>
+</head>
+<body class="bg-green-50 text-gray-800">
 
-### Task:
-Fix the quiz flow by removing the manual "Check Answer" button and making answer selection automatic.
+    <!-- Header -->
+    <header class="forest-header text-white shadow-lg">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-11 h-11 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-landmark text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">America First Studies</h1>
+                    <p class="text-green-200 text-sm -mt-1">Knowledge Assessment Platform</p>
+                </div>
+            </div>
+            <div class="px-3 py-1.5 bg-white/10 rounded-2xl text-xs flex items-center gap-x-2">
+                <i class="fa-solid fa-globe"></i>
+                <span>United States History &amp; Civics</span>
+            </div>
+        </div>
+    </header>
 
-### New Desired Behavior:
-- When the user clicks an answer option, it should be **automatically evaluated**.
-- Highlight the correct answer in green.
-- If the user selected the wrong answer, highlight their choice in red.
-- Immediately show the explanation.
-- Then show the "Next Question" button.
-- Remove the "Check Answer" button entirely.
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
 
-### Requirements:
-- Keep the current level structure (Citizen, Patriot, Founder).
-- Keep randomization and localStorage tracking for used questions.
-- Keep the forest green professional design.
-- Maintain rich explanations.
-- The flow should work smoothly from question 1 to the last question without breaking.
+        <!-- WELCOME SCREEN -->
+        <div id="welcome-screen">
+            <div class="max-w-2xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-green-100 text-green-800 rounded-3xl text-sm font-medium mb-4">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Interactive Learning Tool</span>
+                </div>
+                <h2 class="text-4xl font-semibold tracking-tighter heading-serif text-green-900">Test &amp; Strengthen Your Civic Knowledge</h2>
+                <p class="mt-4 text-lg text-gray-600">Randomized questions. No repeats across rounds. Clean professional design.</p>
+            </div>
 
-Please update the code accordingly and keep it clean.
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <!-- Citizen -->
+                <div onclick="selectLevel(1)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 1</div>
+                            <div class="text-2xl font-semibold mt-1">Citizen</div>
+                        </div>
+                        <i class="fa-solid fa-user text-3xl text-green-600"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">Foundational knowledge of American civics and history.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">20 questions</div>
+                </div>
+
+                <!-- Patriot -->
+                <div onclick="selectLevel(2)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 2</div>
+                            <div class="text-2xl font-semibold mt-1">Patriot</div>
+                        </div>
+                        <i class="fa-solid fa-flag text-3xl text-green-600"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">Deeper understanding of U.S. history, amendments, and key events.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">20 questions</div>
+                </div>
+
+                <!-- Founder -->
+                <div onclick="selectLevel(3)" class="cursor-pointer bg-white border border-green-200 hover:border-green-400 rounded-3xl p-6 transition-all hover:shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-semibold tracking-widest text-green-700">LEVEL 3</div>
+                            <div class="text-2xl font-semibold mt-1">Founder</div>
+                        </div>
+                        <i class="fa-solid fa-landmark text-3xl text-green-600"></i>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">Advanced mastery of constitutional ideas and founding principles.</p>
+                    <div class="mt-5 text-xs px-3 py-1 bg-green-100 text-green-700 inline-block rounded-2xl">20 questions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen" class="hidden max-w-3xl mx-auto">
+            <div class="flex items-center justify-between mb-4 px-1">
+                <div>
+                    <span id="level-badge" class="inline-flex items-center px-3.5 py-1 rounded-2xl text-xs font-semibold bg-green-800 text-white"></span>
+                    <span id="question-counter" class="ml-3 text-sm font-medium text-gray-500"></span>
+                </div>
+                <div class="px-3 py-1 bg-white border border-green-200 rounded-2xl text-sm flex items-center gap-x-1.5">
+                    <i class="fa-solid fa-tachometer-alt text-green-700"></i>
+                    <span id="score-display" class="font-semibold">Score: 0</span>
+                </div>
+            </div>
+
+            <div class="h-2 bg-green-100 rounded-full mb-6 overflow-hidden">
+                <div id="progress-bar" class="h-2 bg-green-700 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="quiz-card bg-white border border-green-200 rounded-3xl p-8 shadow-sm">
+                <div id="question-text" class="text-lg font-medium text-gray-900 leading-snug mb-8"></div>
+                <div id="options-container" class="space-y-3"></div>
+
+                <div id="explanation-box" class="hidden mt-6 p-5 bg-green-50 border border-green-200 rounded-2xl text-sm">
+                    <div class="flex gap-x-3">
+                        <i class="fa-solid fa-info-circle text-green-700 mt-0.5"></i>
+                        <div>
+                            <div class="font-semibold text-green-800 mb-1">Explanation</div>
+                            <div id="explanation-text" class="text-gray-700"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-6 px-1">
+                <button onclick="resetToWelcome()" class="px-5 py-2.5 text-sm flex items-center gap-x-2 text-gray-500 hover:text-gray-700">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Exit Quiz</span>
+                </button>
+
+                <button id="next-btn" onclick="nextQuestion()" 
+                        class="hidden px-8 py-2.5 rounded-2xl font-medium text-sm border border-green-700 text-green-700 hover:bg-green-50">
+                    Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="results-screen" class="hidden max-w-2xl mx-auto">
+            <div class="bg-white border border-green-200 rounded-3xl p-8 text-center">
+                <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-trophy text-4xl text-green-700"></i>
+                </div>
+                <h3 class="text-3xl font-semibold tracking-tight">Round Complete</h3>
+                <p id="results-level" class="text-green-700 mt-1"></p>
+                <div class="my-8">
+                    <div class="text-7xl font-semibold tabular-nums text-green-900" id="final-score">0</div>
+                    <div class="text-lg text-gray-500">correct out of <span id="total-questions"></span></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="startNewRound(currentLevel)" class="px-6 py-3 rounded-2xl font-medium bg-green-700 text-white flex items-center justify-center gap-x-2">
+                        Start New Round
+                    </button>
+                    <button onclick="resetQuestionPool()" class="px-6 py-3 rounded-2xl font-medium border border-green-300 text-green-700 hover:bg-green-50">
+                        Reset Question Pool
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== QUESTIONS ====================
+        const questions = [
+            // CITIZEN (20)
+            { id: 1, question: "Who was the primary author of the Declaration of Independence?", options: ["Thomas Jefferson", "John Adams", "Benjamin Franklin", "James Madison"], correctIndex: 0, explanation: "Thomas Jefferson drafted the Declaration of Independence in 1776." },
+            { id: 2, question: "In what year was the U.S. Constitution signed?", options: ["1776", "1787", "1789", "1791"], correctIndex: 1, explanation: "The Constitution was signed on September 17, 1787." },
+            { id: 3, question: "How many amendments make up the Bill of Rights?", options: ["8", "10", "12", "27"], correctIndex: 1, explanation: "The first ten amendments are known as the Bill of Rights." },
+            { id: 4, question: "Which amendment abolished slavery?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 0, explanation: "The 13th Amendment ended slavery in 1865." },
+            { id: 5, question: "Who is known as the 'Father of the Constitution'?", options: ["Thomas Jefferson", "James Madison", "Alexander Hamilton", "George Washington"], correctIndex: 1, explanation: "James Madison played the central role in drafting the Constitution." },
+            { id: 6, question: "What does the First Amendment primarily protect?", options: ["Right to bear arms", "Freedom of speech and religion", "Right to a jury trial", "Protection from search and seizure"], correctIndex: 1, explanation: "The First Amendment protects freedom of speech, religion, press, assembly, and petition." },
+            { id: 7, question: "Which branch of government makes the laws?", options: ["Executive", "Judicial", "Legislative", "Military"], correctIndex: 2, explanation: "Congress (the Legislative Branch) makes the laws." },
+            { id: 8, question: "What is the supreme law of the United States?", options: ["The Declaration of Independence", "The Constitution", "The Bill of Rights", "State laws"], correctIndex: 1, explanation: "The U.S. Constitution is the supreme law of the land." },
+            { id: 9, question: "How many branches of government does the Constitution create?", options: ["Two", "Three", "Four", "Five"], correctIndex: 1, explanation: "The Constitution establishes three branches: Legislative, Executive, and Judicial." },
+            { id: 10, question: "What does the Preamble of the Constitution begin with?", options: ["When in the Course of human events", "We the People", "Four score and seven years ago", "In Order to form a more perfect Union"], correctIndex: 1, explanation: "The Preamble famously begins with 'We the People...'" },
+            { id: 11, question: "Which amendment guarantees freedom of the press?", options: ["First Amendment", "Second Amendment", "Fourth Amendment", "Fifth Amendment"], correctIndex: 0, explanation: "Freedom of the press is protected by the First Amendment." },
+            { id: 12, question: "What does the Second Amendment protect?", options: ["Freedom of speech", "Right to bear arms", "Right to a fair trial", "Protection from cruel punishment"], correctIndex: 1, explanation: "The Second Amendment protects the right to keep and bear arms." },
+            { id: 13, question: "Which branch enforces the laws?", options: ["Legislative", "Executive", "Judicial", "State governments"], correctIndex: 1, explanation: "The Executive Branch, led by the President, enforces the laws." },
+            { id: 14, question: "What is the highest court in the United States?", options: ["District Court", "Court of Appeals", "Supreme Court", "State Supreme Court"], correctIndex: 2, explanation: "The U.S. Supreme Court is the highest court in the country." },
+            { id: 15, question: "Which document declared America’s independence from Britain?", options: ["The Constitution", "The Bill of Rights", "The Declaration of Independence", "The Federalist Papers"], correctIndex: 2, explanation: "The Declaration of Independence was adopted on July 4, 1776." },
+            { id: 16, question: "What does the Fourth Amendment protect against?", options: ["Cruel and unusual punishment", "Unreasonable searches and seizures", "Self-incrimination", "Double jeopardy"], correctIndex: 1, explanation: "The Fourth Amendment protects people from unreasonable searches and seizures." },
+            { id: 17, question: "Which amendment gave African American men the right to vote?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 2, explanation: "The 15th Amendment (1870) prohibited denying the vote based on race." },
+            { id: 18, question: "What is the main job of the Judicial Branch?", options: ["Make laws", "Enforce laws", "Interpret laws", "Declare war"], correctIndex: 2, explanation: "The Judicial Branch interprets the laws and the Constitution." },
+            { id: 19, question: "Which amendment protects against self-incrimination?", options: ["Fourth Amendment", "Fifth Amendment", "Sixth Amendment", "Eighth Amendment"], correctIndex: 1, explanation: "The Fifth Amendment protects individuals from being forced to incriminate themselves." },
+            { id: 20, question: "What does 'We the People' refer to in the Constitution?", options: ["Only property owners", "The citizens of the United States", "Only white men", "The state governments"], correctIndex: 1, explanation: "The phrase 'We the People' refers to the citizens of the United States." },
+
+            // PATRIOT (20)
+            { id: 21, question: "Which amendment is known for the Equal Protection Clause?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 1, explanation: "The 14th Amendment's Equal Protection Clause requires states to treat citizens equally." },
+            { id: 22, question: "What was the main purpose of the Federalist Papers?", options: ["To declare independence", "To promote ratification of the Constitution", "To create the Bill of Rights", "To abolish slavery"], correctIndex: 1, explanation: "The Federalist Papers were written to encourage ratification of the Constitution." },
+            { id: 23, question: "Which Supreme Court case established judicial review?", options: ["Brown v. Board", "Marbury v. Madison", "Plessy v. Ferguson", "Dred Scott"], correctIndex: 1, explanation: "Marbury v. Madison (1803) gave courts the power to declare laws unconstitutional." },
+            { id: 24, question: "What did the 17th Amendment introduce?", options: ["Abolition of slavery", "Direct election of U.S. Senators", "Women's suffrage", "Term limits for presidents"], correctIndex: 1, explanation: "The 17th Amendment allowed citizens to directly elect their Senators." },
+            { id: 25, question: "Which president was known as the 'Trust Buster' during the Progressive Era?", options: ["Woodrow Wilson", "Theodore Roosevelt", "William Howard Taft", "Franklin D. Roosevelt"], correctIndex: 1, explanation: "Theodore Roosevelt aggressively broke up large monopolies." },
+            { id: 26, question: "What does Article III of the Constitution establish?", options: ["Congress", "The Presidency", "The Supreme Court and federal judiciary", "The amendment process"], correctIndex: 2, explanation: "Article III creates the Judicial Branch." },
+            { id: 27, question: "Which amendment granted women the right to vote?", options: ["15th Amendment", "17th Amendment", "19th Amendment", "26th Amendment"], correctIndex: 2, explanation: "The 19th Amendment (1920) gave women suffrage." },
+            { id: 28, question: "What was the main ruling in Brown v. Board of Education (1954)?", options: ["Voting rights", "Racial segregation in schools was unconstitutional", "Freedom of speech", "Right to counsel"], correctIndex: 1, explanation: "Brown declared racial segregation in public schools unconstitutional." },
+            { id: 29, question: "What does the Supremacy Clause establish?", options: ["State laws are supreme", "Federal law is the supreme law of the land", "The President has unlimited power", "States can nullify federal laws"], correctIndex: 1, explanation: "The Supremacy Clause makes the Constitution and federal laws supreme over state law." },
+            { id: 30, question: "What was the main concern of the Anti-Federalists?", options: ["Too little national power", "Lack of a Bill of Rights", "Too much state power", "Weak presidency"], correctIndex: 1, explanation: "They demanded a Bill of Rights to protect individual liberties." },
+            { id: 31, question: "Which amendment protects against cruel and unusual punishment?", options: ["Fourth", "Fifth", "Sixth", "Eighth"], correctIndex: 3, explanation: "The Eighth Amendment prohibits cruel and unusual punishments." },
+            { id: 32, question: "What does the Commerce Clause allow Congress to regulate?", options: ["Only foreign trade", "Trade between states and with other nations", "Only intrastate trade", "Only agriculture"], correctIndex: 1, explanation: "The Commerce Clause gives Congress power over interstate and foreign commerce." },
+            { id: 33, question: "Which case upheld 'separate but equal' segregation?", options: ["Brown v. Board", "Marbury v. Madison", "Plessy v. Ferguson", "Gideon v. Wainwright"], correctIndex: 2, explanation: "Plessy v. Ferguson (1896) upheld racial segregation under 'separate but equal'." },
+            { id: 34, question: "What is the purpose of the 14th Amendment's Due Process Clause?", options: ["Protect property only", "Ensure fair legal procedures before depriving life, liberty, or property", "Expand state power", "Limit voting rights"], correctIndex: 1, explanation: "It requires fair procedures before government can take away fundamental rights." },
+            { id: 35, question: "Which document was written to support ratification of the Constitution?", options: ["Declaration of Independence", "Federalist Papers", "Articles of Confederation", "Common Sense"], correctIndex: 1, explanation: "The Federalist Papers supported ratification of the Constitution." },
+            { id: 36, question: "What did the 26th Amendment do?", options: ["Abolished poll tax", "Lowered voting age to 18", "Gave women the vote", "Limited presidential terms"], correctIndex: 1, explanation: "The 26th Amendment lowered the voting age from 21 to 18." },
+            { id: 37, question: "What is the 'Necessary and Proper Clause' also called?", options: ["Supremacy Clause", "Commerce Clause", "Elastic Clause", "Full Faith and Credit Clause"], correctIndex: 2, explanation: "It is often called the Elastic Clause because it allows flexibility in legislation." },
+            { id: 38, question: "What did the 15th Amendment prohibit?", options: ["Slavery", "Racial discrimination in voting", "Poll taxes", "Literacy tests"], correctIndex: 1, explanation: "The 15th Amendment banned racial discrimination in voting." },
+            { id: 39, question: "Which branch has the power to declare war?", options: ["Executive", "Judicial", "Legislative", "States"], correctIndex: 2, explanation: "Only Congress has the constitutional power to declare war." },
+            { id: 40, question: "What is judicial review?", options: ["Power of Congress to review laws", "Power of courts to declare laws unconstitutional", "Power of the President to veto laws", "Power of states to ignore federal law"], correctIndex: 1, explanation: "Judicial review allows courts to strike down unconstitutional laws." },
+
+            // FOUNDER (20 - Hard)
+            { id: 41, question: "Why did the Founders create separation of powers and checks and balances?", options: ["To make government faster", "To prevent any one branch from becoming too powerful", "To increase presidential power", "To reduce citizen participation"], correctIndex: 1, explanation: "They feared concentrated power and designed the system to guard against tyranny." },
+            { id: 42, question: "What was the main compromise that created the U.S. Senate?", options: ["Three-Fifths Compromise", "Great Compromise", "Missouri Compromise", "Compromise of 1850"], correctIndex: 1, explanation: "The Great Compromise gave equal representation to states in the Senate." },
+            { id: 43, question: "How did the 14th Amendment change federalism?", options: ["It weakened the national government", "It gave the national government power to protect rights against the states", "It increased state sovereignty", "It had little effect"], correctIndex: 1, explanation: "The 14th Amendment expanded national authority to enforce constitutional rights against states." },
+            { id: 44, question: "According to Federalist No. 10, how should factions be controlled?", options: ["By banning them", "By creating a large republic", "By giving power to the states", "By creating a monarchy"], correctIndex: 1, explanation: "Madison believed a large republic would dilute the power of any single faction." },
+            { id: 45, question: "Why did the Founders give federal judges lifetime appointments?", options: ["To reward allies", "To protect judicial independence from politics", "To increase executive power", "To reduce government spending"], correctIndex: 1, explanation: "Lifetime tenure was meant to shield judges from political pressure." },
+            { id: 46, question: "What tension exists between the 9th and 10th Amendments?", options: ["Both limit rights", "The 9th protects unenumerated rights while the 10th protects state and popular power", "They contradict each other", "Neither has legal effect"], correctIndex: 1, explanation: "The 9th protects individual rights not listed; the 10th reserves power to states and the people." },
+            { id: 47, question: "What was the greatest fear of the Anti-Federalists?", options: ["Weak national government", "Tyranny from a powerful central government without a Bill of Rights", "Too much state power", "A weak presidency"], correctIndex: 1, explanation: "They feared the new government could abuse power without explicit rights protections." },
+            { id: 48, question: "How did the Founders try to prevent majority tyranny?", options: ["By creating pure democracy", "By designing a republic with checks and balances", "By limiting voting to elites", "By giving all power to states"], correctIndex: 1, explanation: "They created a constitutional republic with multiple safeguards against unchecked majority rule." },
+            { id: 49, question: "How has the Necessary and Proper Clause been interpreted over time?", options: ["It strictly limits Congress", "It has been used to expand congressional power", "It only applies to the President", "It was ruled unconstitutional"], correctIndex: 1, explanation: "The clause has been broadly interpreted to allow Congress flexibility in legislation." },
+            { id: 50, question: "Why did the Founders prefer a republic over pure democracy?", options: ["They distrusted all citizens", "They feared direct democracy could lead to instability and majority tyranny", "They wanted less citizen participation", "They copied European monarchies"], correctIndex: 1, explanation: "They believed a republic with elected representatives would better protect liberty." },
+            { id: 51, question: "What does originalism claim about constitutional interpretation?", options: ["It should evolve with society", "It should be interpreted according to its original public meaning", "Only Congress should interpret it", "It has no fixed meaning"], correctIndex: 1, explanation: "Originalism holds that the Constitution should be interpreted based on its meaning when adopted." },
+            { id: 52, question: "How does the Electoral College reflect the Founders' concerns?", options: ["It increases direct democracy", "It creates a buffer between popular will and the presidency", "It eliminates small state influence", "It was designed to boost turnout"], correctIndex: 1, explanation: "It was partly designed to moderate direct popular influence in choosing the president." },
+            { id: 53, question: "What was the purpose of the Three-Fifths Compromise?", options: ["To end slavery", "To count enslaved people for representation and taxation", "To give enslaved people voting rights", "To immediately ban the slave trade"], correctIndex: 1, explanation: "It was a political compromise on how to count enslaved people for representation." },
+            { id: 54, question: "Why is federalism important in the U.S. Constitution?", options: ["It concentrates power nationally", "It divides power between national and state governments", "It eliminates state governments", "It gives the President control over states"], correctIndex: 1, explanation: "Federalism creates a system of shared power between national and state governments." },
+            { id: 55, question: "What danger did Madison warn about in Federalist No. 51?", options: ["Foreign invasion", "Accumulation of power in one branch", "Economic inequality", "Religious conflict"], correctIndex: 1, explanation: "Madison warned against any one branch gaining too much power." },
+            { id: 56, question: "How did Madison view factions in Federalist No. 10?", options: ["They should be banned", "They are inevitable but can be controlled in a large republic", "They are always good", "They only exist in monarchies"], correctIndex: 1, explanation: "He accepted factions as natural but believed a large republic could limit their harm." },
+            { id: 57, question: "What is the significance of the 14th Amendment's Citizenship Clause?", options: ["It only applied to white men", "It defined national citizenship and overturned Dred Scott", "It gave states power to define citizenship", "It has been ruled unconstitutional"], correctIndex: 1, explanation: "It established birthright citizenship and overturned the Dred Scott decision." },
+            { id: 58, question: "Why did the Founders include an amendment process?", options: ["They wanted the Constitution to be easily changed", "They wanted change to be possible but difficult", "They expected frequent amendments", "They copied European systems"], correctIndex: 1, explanation: "They balanced stability with the ability to adapt over time." },
+            { id: 59, question: "What ongoing tension does federalism create?", options: ["No tension exists", "Tension between national power and state sovereignty", "Complete state dominance", "Unlimited national power"], correctIndex: 1, explanation: "Federalism creates continuous negotiation and tension between national and state authority." },
+            { id: 60, question: "What was the Founders' primary goal in designing the Constitution?", options: ["Maximum efficiency", "Protecting liberty while creating stable government", "Copying Britain exactly", "Giving maximum power to the majority"], correctIndex: 1, explanation: "They sought to balance liberty and effective governance while preventing tyranny." }
+        ];
+
+        // State
+        let currentLevel = 1;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let usedQuestionIds = new Set();
+
+        function loadUsedQuestions() {
+            const saved = localStorage.getItem('afs_usedQuestionIds');
+            if (saved) usedQuestionIds = new Set(JSON.parse(saved));
+        }
+
+        function saveUsedQuestions() {
+            localStorage.setItem('afs_usedQuestionIds', JSON.stringify(Array.from(usedQuestionIds)));
+        }
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function selectLevel(level) {
+            currentLevel = level;
+            startNewRound(level);
+        }
+
+        function startNewRound(level) {
+            currentLevel = level;
+            const numQuestions = level === 1 ? 5 : level === 2 ? 8 : 10;
+
+            let available = questions.filter(q => !usedQuestionIds.has(q.id));
+            if (available.length === 0) {
+                usedQuestionIds.clear();
+                available = questions;
+            }
+
+            currentQuestions = shuffle(available).slice(0, Math.min(numQuestions, available.length));
+            currentQuestionIndex = 0;
+            score = 0;
+
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+
+            const levelNames = {1: 'Citizen', 2: 'Patriot', 3: 'Founder'};
+            document.getElementById('level-badge').innerHTML = `LEVEL ${level} • ${levelNames[level]}`;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question-text').innerHTML = q.question;
+            document.getElementById('question-counter').innerHTML = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('score-display').innerHTML = `Score: ${score}`;
+            document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / currentQuestions.length) * 100}%`;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            let optionData = q.options.map((text, idx) => ({ text, isCorrect: idx === q.correctIndex }));
+            optionData = shuffle(optionData);
+
+            optionData.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full text-left px-5 py-3.5 border border-green-200 rounded-2xl flex items-center gap-x-3 text-sm`;
+                btn.innerHTML = `<span class="flex-1">${opt.text}</span>`;
+                btn.dataset.correct = opt.isCorrect;
+                btn.onclick = () => handleAnswerSelection(btn, opt.isCorrect, q);
+                container.appendChild(btn);
+            });
+        }
+
+        function handleAnswerSelection(selectedBtn, isCorrect, question) {
+            // Disable all buttons
+            document.querySelectorAll('#options-container button').forEach(btn => {
+                btn.disabled = true;
+
+                if (btn.dataset.correct === 'true') {
+                    btn.classList.add('correct');
+                } else if (btn === selectedBtn) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (isCorrect) score++;
+            document.getElementById('score-display').innerHTML = `Score: ${score}`;
+
+            // Show explanation
+            document.getElementById('explanation-text').innerHTML = question.explanation;
+            document.getElementById('explanation-box').classList.remove('hidden');
+
+            // Show Next button
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                finishRound();
+            }
+        }
+
+        function finishRound() {
+            currentQuestions.forEach(q => usedQuestionIds.add(q.id));
+            saveUsedQuestions();
+
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            const percent = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('final-score').innerHTML = score;
+            document.getElementById('total-questions').innerHTML = currentQuestions.length;
+        }
+
+        function resetToWelcome() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('hidden');
+        }
+
+        function resetQuestionPool() {
+            if (confirm('Reset all used questions?')) {
+                usedQuestionIds.clear();
+                localStorage.removeItem('afs_usedQuestionIds');
+                alert('Question pool has been reset.');
+            }
+        }
+
+        function initializeApp() {
+            loadUsedQuestions();
+        }
+
+        window.onload = initializeApp;
+    </script>
+</body>
+</html>
