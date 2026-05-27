@@ -164,27 +164,29 @@
     <script>
         // ==================== QUESTIONS ====================
         const questions = [
-            // CITIZEN (20)
-            { id: 1, question: "Who was the primary author of the Declaration of Independence?", options: ["Thomas Jefferson", "John Adams", "Benjamin Franklin", "James Madison"], correctIndex: 0, explanation: "Thomas Jefferson drafted the Declaration of Independence in 1776." },
-            { id: 2, question: "In what year was the U.S. Constitution signed?", options: ["1776", "1787", "1789", "1791"], correctIndex: 1, explanation: "The Constitution was signed on September 17, 1787." },
-            { id: 3, question: "How many amendments make up the Bill of Rights?", options: ["8", "10", "12", "27"], correctIndex: 1, explanation: "The first ten amendments are known as the Bill of Rights." },
-            { id: 4, question: "Which amendment abolished slavery?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 0, explanation: "The 13th Amendment ended slavery in 1865." },
-            { id: 5, question: "Who is known as the 'Father of the Constitution'?", options: ["Thomas Jefferson", "James Madison", "Alexander Hamilton", "George Washington"], correctIndex: 1, explanation: "James Madison played the central role in drafting the Constitution." },
-            { id: 6, question: "What does the First Amendment primarily protect?", options: ["Right to bear arms", "Freedom of speech and religion", "Right to a jury trial", "Protection from search and seizure"], correctIndex: 1, explanation: "The First Amendment protects freedom of speech, religion, press, assembly, and petition." },
-            { id: 7, question: "Which branch of government makes the laws?", options: ["Executive", "Judicial", "Legislative", "Military"], correctIndex: 2, explanation: "Congress (the Legislative Branch) makes the laws." },
-            { id: 8, question: "What is the supreme law of the United States?", options: ["The Declaration of Independence", "The Constitution", "The Bill of Rights", "State laws"], correctIndex: 1, explanation: "The U.S. Constitution is the supreme law of the land." },
-            { id: 9, question: "How many branches of government does the Constitution create?", options: ["Two", "Three", "Four", "Five"], correctIndex: 1, explanation: "The Constitution establishes three branches: Legislative, Executive, and Judicial." },
-            { id: 10, question: "What does the Preamble of the Constitution begin with?", options: ["When in the Course of human events", "We the People", "Four score and seven years ago", "In Order to form a more perfect Union"], correctIndex: 1, explanation: "The Preamble famously begins with 'We the People...'" },
-            { id: 11, question: "Which amendment guarantees freedom of the press?", options: ["First Amendment", "Second Amendment", "Fourth Amendment", "Fifth Amendment"], correctIndex: 0, explanation: "Freedom of the press is protected by the First Amendment." },
-            { id: 12, question: "What does the Second Amendment protect?", options: ["Freedom of speech", "Right to bear arms", "Right to a fair trial", "Protection from cruel punishment"], correctIndex: 1, explanation: "The Second Amendment protects the right to keep and bear arms." },
-            { id: 13, question: "Which branch enforces the laws?", options: ["Legislative", "Executive", "Judicial", "State governments"], correctIndex: 1, explanation: "The Executive Branch, led by the President, enforces the laws." },
-            { id: 14, question: "What is the highest court in the United States?", options: ["District Court", "Court of Appeals", "Supreme Court", "State Supreme Court"], correctIndex: 2, explanation: "The U.S. Supreme Court is the highest court in the country." },
-            { id: 15, question: "Which document declared America’s independence from Britain?", options: ["The Constitution", "The Bill of Rights", "The Declaration of Independence", "The Federalist Papers"], correctIndex: 2, explanation: "The Declaration of Independence was adopted on July 4, 1776." },
-            { id: 16, question: "What does the Fourth Amendment protect against?", options: ["Cruel and unusual punishment", "Unreasonable searches and seizures", "Self-incrimination", "Double jeopardy"], correctIndex: 1, explanation: "The Fourth Amendment protects people from unreasonable searches and seizures." },
-            { id: 17, question: "Which amendment gave African American men the right to vote?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 2, explanation: "The 15th Amendment (1870) prohibited denying the vote based on race." },
-            { id: 18, question: "What is the main job of the Judicial Branch?", options: ["Make laws", "Enforce laws", "Interpret laws", "Declare war"], correctIndex: 2, explanation: "The Judicial Branch interprets the laws and the Constitution." },
-            { id: 19, question: "Which amendment protects against self-incrimination?", options: ["Fourth Amendment", "Fifth Amendment", "Sixth Amendment", "Eighth Amendment"], correctIndex: 1, explanation: "The Fifth Amendment protects individuals from being forced to incriminate themselves." },
-            { id: 20, question: "What does 'We the People' refer to in the Constitution?", options: ["Only property owners", "The citizens of the United States", "Only white men", "The state governments"], correctIndex: 1, explanation: "The phrase 'We the People' refers to the citizens of the United States." },
+          // CITIZEN (20 - Easy)
+const citizenQuestions = [
+  { id: 1, question: "Who was the first President of the United States?", options: ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"], correctIndex: 2 },
+  { id: 2, question: "What year was the Declaration of Independence signed?", options: ["1776", "1787", "1789", "1800"], correctIndex: 0 },
+  { id: 3, question: "What does the First Amendment protect?", options: ["Right to bear arms", "Freedom of speech", "Right to a fair trial", "Protection from taxes"], correctIndex: 1 },
+  { id: 4, question: "Which amendment abolished slavery?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 0 },
+  { id: 5, question: "What do we call the first ten amendments to the Constitution?", options: ["The Preamble", "The Bill of Rights", "The Federalist Papers", "The Articles of Confederation"], correctIndex: 1 },
+  { id: 6, question: "Who wrote the Declaration of Independence?", options: ["George Washington", "Benjamin Franklin", "Thomas Jefferson", "James Madison"], correctIndex: 2 },
+  { id: 7, question: "What are the three branches of government?", options: ["Executive, Judicial, Legislative", "Senate, House, President", "Army, Navy, Air Force", "Federal, State, Local"], correctIndex: 0 },
+  { id: 8, question: "What is the supreme law of the United States?", options: ["The Declaration of Independence", "The Constitution", "The Bill of Rights", "The Federalist Papers"], correctIndex: 1 },
+  { id: 9, question: "How many amendments are in the Bill of Rights?", options: ["8", "10", "12", "27"], correctIndex: 1 },
+  { id: 10, question: "Who is the head of the Executive Branch?", options: ["The Chief Justice", "The President", "The Speaker of the House", "The Senate Majority Leader"], correctIndex: 1 },
+  { id: 11, question: "What does the 2nd Amendment protect?", options: ["Freedom of speech", "Right to bear arms", "Freedom of religion", "Right to privacy"], correctIndex: 1 },
+  { id: 12, question: "What is the minimum voting age in the United States?", options: ["16", "17", "18", "21"], correctIndex: 2 },
+  { id: 13, question: "Which document starts with 'We the People'?", options: ["The Declaration of Independence", "The Constitution", "The Bill of Rights", "The Gettysburg Address"], correctIndex: 1 },
+  { id: 14, question: "How many U.S. Senators are there?", options: ["50", "100", "435", "538"], correctIndex: 1 },
+  { id: 15, question: "What is the term length for a U.S. President?", options: ["2 years", "4 years", "6 years", "8 years"], correctIndex: 1 },
+  { id: 16, question: "What holiday do Americans celebrate on July 4th?", options: ["Memorial Day", "Independence Day", "Veterans Day", "Labor Day"], correctIndex: 1 },
+  { id: 17, question: "How many stars are on the U.S. flag?", options: ["13", "50", "100", "27"], correctIndex: 1 },
+  { id: 18, question: "What is the capital of the United States?", options: ["New York City", "Washington, D.C.", "Philadelphia", "Boston"], correctIndex: 1 },
+  { id: 19, question: "Which branch of government includes the President?", options: ["Legislative", "Judicial", "Executive", "State"], correctIndex: 2 },
+  { id: 20, question: "What does the Pledge of Allegiance promise loyalty to?", options: ["The President", "The flag and the United States", "The Constitution only", "The military"], correctIndex: 1 }
+];
 
             // PATRIOT (20)
             { id: 21, question: "Which amendment is known for the Equal Protection Clause?", options: ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"], correctIndex: 1, explanation: "The 14th Amendment's Equal Protection Clause requires states to treat citizens equally." },
